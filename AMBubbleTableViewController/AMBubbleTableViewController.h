@@ -1,0 +1,18 @@
+//
+//  AMBubbleTableViewController.h
+//  BubbleTableDemo
+//
+//  Created by Andrea Mazzini on 30/06/13.
+//  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
+//
+
+#import "AMBubbleGlobals.h"
+
+@interface AMBubbleTableViewController : UIViewController
+
+@property (nonatomic, assign) id<AMBubbleTableDataSource> dataSource;
+@property (nonatomic, assign) id<AMBubbleTableDelegate> delegate;
+
+- (void)reloadTableScrollingToBottom:(BOOL)scroll;
+
+@end
