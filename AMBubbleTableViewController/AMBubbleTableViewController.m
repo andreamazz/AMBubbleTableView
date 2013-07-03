@@ -191,11 +191,11 @@
 	
 	NSString* stringDate;
 	if (type == AMBubbleCellTimestamp) {
-		[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle]; // Jan 1, 2000
-		[self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];  // 1:23 PM
+		[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];	// Jan 1, 2000
+		[self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];	// 1:23 PM
 		stringDate = [self.dateFormatter stringFromDate:date];
 	} else {
-		[self.dateFormatter setDateFormat:@"HH:mm"];
+		[self.dateFormatter setDateFormat:@"HH:mm"];					// 13:23
 		stringDate = [self.dateFormatter stringFromDate:date];
 	}
 
@@ -279,15 +279,20 @@
     
     self.textView.scrollEnabled = (numLines >= 4);
 	
+	// Adjust inut container's size
 	self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,
                                      self.imageInput.frame.origin.y - delta,
                                      self.imageInput.frame.size.width,
                                      self.imageInput.frame.size.height + delta);
 	
+	// Adjust table view's insets
 	UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
 										   0.0f,
 										   self.view.frame.size.height - self.imageInput.frame.origin.y - kInputHeight,
 										   0.0f);
+
+	[self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + delta) animated:YES];
+
 	
 	self.tableView.contentInset = insets;
 	self.tableView.scrollIndicatorInsets = insets;
