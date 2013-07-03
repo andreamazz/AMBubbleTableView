@@ -267,17 +267,21 @@
 {
 	int numLines = self.textView.contentSize.height / self.textView.font.lineHeight;
     
-    self.textView.frame = CGRectMake(self.textView.frame.origin.x,
-                                     self.textView.frame.origin.y,
-                                     self.textView.frame.size.width,
-                                     self.textView.frame.size.height + delta);
-    
-    self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
+	self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f,
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
-    
+    NSLog(@"numlines: %d", numLines);
     self.textView.scrollEnabled = (numLines >= 4);
+	
+	if (numLines >= 4 || numLines == 1) {
+		return;
+	}
+	
+	self.textView.frame = CGRectMake(self.textView.frame.origin.x,
+                                     self.textView.frame.origin.y,
+                                     self.textView.frame.size.width,
+                                     self.textView.frame.size.height + delta);
 	
 	// Adjust inut container's size
 	self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,
@@ -293,7 +297,6 @@
 
 	[self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + delta) animated:YES];
 
-	
 	self.tableView.contentInset = insets;
 	self.tableView.scrollIndicatorInsets = insets;
 }
