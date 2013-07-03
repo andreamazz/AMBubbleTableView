@@ -16,6 +16,7 @@
 
 @interface AMBubbleTableViewController () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
+@property (strong, nonatomic) NSMutableDictionary*	options;
 @property (nonatomic, strong) UITableView*	tableView;
 @property (nonatomic, strong) UIImageView*	imageInput;
 @property (nonatomic, strong) UITextView*	textView;
@@ -32,6 +33,24 @@
 {
 	[super viewDidLoad];
 	[self setupView];
+}
+
+- (void)setBubbleTableOptions:(NSDictionary *)options
+{
+	[self.options addEntriesFromDictionary:options];
+}
+
+- (NSMutableDictionary*)options
+{
+	if (_options == nil) {
+		_options = [[NSMutableDictionary alloc]
+					initWithDictionary:
+					@{
+					// Default options
+					AMOptionsTableStyle : @(AMBubbleTableCellDefault)
+					}];
+	}
+	return _options;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -59,12 +78,10 @@
 
 - (void)setupView
 {
-    CGSize size = self.view.frame.size;
-
 	UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
 																						action:@selector(handleTapGesture:)];
 	// Table View
-    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - kInputHeight);
+    CGRect tableFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height - kInputHeight);
 	self.tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	[self.tableView addGestureRecognizer:gestureRecognizer];
 	[self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -75,7 +92,7 @@
 	[self.view addSubview:self.tableView];
 	
     // Input background
-    CGRect inputFrame = CGRectMake(0.0f, size.height - kInputHeight, size.width, kInputHeight);
+    CGRect inputFrame = CGRectMake(0.0f, self.view.frame.size.height - kInputHeight, self.view.frame.size.width, kInputHeight);
 	
 	self.imageInput = [[UIImageView alloc] initWithImage:
 					   [[UIImage imageNamed:@"imageBar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)]
@@ -106,7 +123,6 @@
     [self.imageInput addSubview:self.textView];
 	self.previousTextFieldHeight = self.textView.contentSize.height;
 
-	
 	// Input field's background
     self.imageInputBack = [[UIImageView alloc] initWithFrame:CGRectMake(self.textView.frame.origin.x - 1.0f,
 																		0.0f,
@@ -149,7 +165,6 @@
     [self.buttonSend addTarget:self	action:@selector(sendPressed:) forControlEvents:UIControlEventTouchUpInside];
 	
     [self.imageInput addSubview:self.buttonSend];
-    
 }
 
 #pragma mark - TableView Delegate
@@ -161,7 +176,8 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString* cellID = [NSString stringWithFormat:@"cell_%d", [self.dataSource cellTypeForRowAtIndexPath:indexPath]];
+	AMBubbleCellType type = [self.dataSource cellTypeForRowAtIndexPath:indexPath];
+	NSString* cellID = [NSString stringWithFormat:@"cell_%d", type];
 	
 	AMBubbleTableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	
@@ -170,7 +186,6 @@
 		cell = [[AMBubbleTableCell alloc] initWithStyle:AMBubbleTableCellDefault reuseIdentifier:cellID];
 	}
 	
-	AMBubbleCellType type = [self.dataSource cellTypeForRowAtIndexPath:indexPath];
 	NSString* text = [self.dataSource textForRowAtIndexPath:indexPath];
 	NSDate* date = [self.dataSource timestampForRowAtIndexPath:indexPath];
 	

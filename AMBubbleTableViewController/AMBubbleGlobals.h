@@ -19,7 +19,6 @@ typedef enum {
 
 #define kMessageTextWidth	180.0f
 
-
 @protocol AMBubbleTableDataSource <NSObject>
 @required
 - (NSInteger)numberOfRows;
@@ -35,6 +34,5 @@ typedef enum {
 - (void)didSendText:(NSString*)text;
 @end
 
-@interface AMBubbleGlobals : NSObject
-
-@end
+// Options
+FOUNDATION_EXPORT NSString *const AMOptionsTableStyle;

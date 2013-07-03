@@ -6,8 +6,5 @@
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 //
 
-#import "AMBubbleGlobals.h"
+NSString *const AMOptionsTableStyle = @"AMOptionsTableStyle";
 
-@implementation AMBubbleGlobals
-
-@end
