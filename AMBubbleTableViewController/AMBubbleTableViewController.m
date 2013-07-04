@@ -107,7 +107,7 @@
 	CGFloat width = self.imageInput.frame.size.width - kButtonWidth;
     
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, kLineHeight)];
-    [self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [self.textView setScrollIndicatorInsets:UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f)];
     [self.textView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
     [self.textView setScrollEnabled:NO];
@@ -265,29 +265,15 @@
 
 - (void)resizeTextViewByHeight:(CGFloat)delta
 {
+	
 	int numLines = self.textView.contentSize.height / self.textView.font.lineHeight;
     
 	self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f,
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
-    NSLog(@"numlines: %d", numLines);
+	
     self.textView.scrollEnabled = (numLines >= 4);
-	
-	if (numLines >= 4 || numLines == 1) {
-		return;
-	}
-	
-	self.textView.frame = CGRectMake(self.textView.frame.origin.x,
-                                     self.textView.frame.origin.y,
-                                     self.textView.frame.size.width,
-                                     self.textView.frame.size.height + delta);
-	
-	// Adjust inut container's size
-	self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,
-                                     self.imageInput.frame.origin.y - delta,
-                                     self.imageInput.frame.size.width,
-                                     self.imageInput.frame.size.height + delta);
 	
 	// Adjust table view's insets
 	UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
@@ -295,10 +281,12 @@
 										   self.view.frame.size.height - self.imageInput.frame.origin.y - kInputHeight,
 										   0.0f);
 
-	[self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + delta) animated:YES];
-
 	self.tableView.contentInset = insets;
 	self.tableView.scrollIndicatorInsets = insets;
+
+	// Slightly scroll the table
+	[self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + delta) animated:YES];
+
 }
 
 - (void)handleTapGesture:(UIGestureRecognizer*)gesture
@@ -308,15 +296,51 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+	// TODO: trim white spaces
 	[self.buttonSend setEnabled:(textView.text.length > 0)];
-	
-	CGFloat textViewContentHeight = textView.contentSize.height;
 
-	if (textViewContentHeight != self.previousTextFieldHeight) {
-		[self resizeTextViewByHeight:textViewContentHeight - self.previousTextFieldHeight];
-	}
+	CGFloat maxHeight = self.textView.font.lineHeight * 5;
+	CGFloat textViewContentHeight = textView.contentSize.height;
+	CGFloat delta = textViewContentHeight - self.previousTextFieldHeight;
+	BOOL isShrinking = textViewContentHeight < self.previousTextFieldHeight;
+
+	delta = (textViewContentHeight + delta >= maxHeight) ? 0.0f : delta;
+
 	
-	self.previousTextFieldHeight = textView.contentSize.height;
+	if(!isShrinking)
+        [self resizeTextViewByHeight:delta];
+    
+    if(delta != 0.0f) {
+        [UIView animateWithDuration:0.25f
+                         animations:^{
+                             UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + delta, 0.0f);
+                             self.tableView.contentInset = insets;
+                             self.tableView.scrollIndicatorInsets = insets;
+							 
+                             [self scrollToBottomAnimated:NO];
+							 
+                             self.imageInput.frame = CGRectMake(0.0f,
+                                                               self.imageInput.frame.origin.y - delta,
+                                                               self.imageInput.frame.size.width,
+                                                               self.imageInput.frame.size.height + delta);
+                         }
+                         completion:^(BOOL finished) {
+                             if(isShrinking)
+                                 [self resizeTextViewByHeight:delta];
+                         }];
+        
+        self.previousTextFieldHeight = MIN(textViewContentHeight, maxHeight);
+    }
+
+	
+	
+	
+//
+//	if (textViewContentHeight != self.previousTextFieldHeight) {
+//		[self resizeTextViewByHeight:delta];
+//	}
+//	
+//	self.previousTextFieldHeight = textView.contentSize.height;
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
