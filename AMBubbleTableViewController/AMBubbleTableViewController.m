@@ -145,7 +145,7 @@
     [self.buttonSend setBackgroundImage:sendBack forState:UIControlStateDisabled];
     [self.buttonSend setBackgroundImage:sendBackHighLighted forState:UIControlStateHighlighted];
     
-    NSString *title = NSLocalizedString(@"Send", nil);
+    NSString *title = NSLocalizedString(@"Send",);
     [self.buttonSend setTitle:title forState:UIControlStateNormal];
     [self.buttonSend setTitle:title forState:UIControlStateHighlighted];
     [self.buttonSend setTitle:title forState:UIControlStateDisabled];
@@ -194,21 +194,26 @@
 		[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];	// Jan 1, 2000
 		[self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];	// 1:23 PM
 		stringDate = [self.dateFormatter stringFromDate:date];
+		[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"date": stringDate }];
 	} else {
 		[self.dateFormatter setDateFormat:@"HH:mm"];					// 13:23
 		stringDate = [self.dateFormatter stringFromDate:date];
+		[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"text": text, @"date": stringDate }];
 	}
-
-	[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"text": text, @"date": stringDate }];
 	
 	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	AMBubbleCellType type = [self.dataSource cellTypeForRowAtIndexPath:indexPath];
 	NSString* text = [self.dataSource textForRowAtIndexPath:indexPath];
 	
-	// TODO Set SentDate height.
+	
+	if (type == AMBubbleCellTimestamp) {
+		// TODO: parametrize
+		return 40;
+	}
     
     // Set MessageCell height.
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:15]
@@ -239,17 +244,15 @@
 
     [UIView animateWithDuration:duration
                           delay:0.0f
-                        options:curve << 16
+                        options:curve << 16 // Options conversion, TODO: fix it
                      animations:^{
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
+						 CGFloat inputViewFrameY = keyboardY - self.imageInput.frame.size.height;
                          
-                         CGRect inputViewFrame = self.imageInput.frame;
-                         CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
-                         
-                         self.imageInput.frame = CGRectMake(inputViewFrame.origin.x,
+                         self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,
                                                            inputViewFrameY,
-                                                           inputViewFrame.size.width,
-                                                           inputViewFrame.size.height);
+                                                           self.imageInput.frame.size.width,
+                                                           self.imageInput.frame.size.height);
                          
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
@@ -286,7 +289,6 @@
 
 	// Slightly scroll the table
 	[self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + delta) animated:YES];
-
 }
 
 - (void)handleTapGesture:(UIGestureRecognizer*)gesture
@@ -331,16 +333,6 @@
         
         self.previousTextFieldHeight = MIN(textViewContentHeight, maxHeight);
     }
-
-	
-	
-	
-//
-//	if (textViewContentHeight != self.previousTextFieldHeight) {
-//		[self resizeTextViewByHeight:delta];
-//	}
-//	
-//	self.previousTextFieldHeight = textView.contentSize.height;
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated

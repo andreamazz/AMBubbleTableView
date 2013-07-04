@@ -29,6 +29,7 @@
 				 @"date": [NSDate date], @"type": @(AMBubbleCellReceived)},
 				 @{@"text": @"Don't Panic.",
 				 @"date": [NSDate date], @"type": @(AMBubbleCellReceived)},
+				 @{@"date": [NSDate date], @"type": @(AMBubbleCellTimestamp)},
 				 @{@"text": @"I'd far rather be happy than right any day.",
 				 @"date": [NSDate date], @"type": @(AMBubbleCellReceived)},
 				 @{@"text": @"The only reason for walking into the jaws of Death is so's you can steal His gold teeth.",

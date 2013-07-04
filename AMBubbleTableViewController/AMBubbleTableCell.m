@@ -60,14 +60,14 @@
         self.imageBackground.frame = CGRectMake(width - size.width - 34.0f,
 												kMessageFontSize - 13.0f, size.width + 34.0f, size.height + 12.0f);
         [self.imageBackground setImage:[[UIImage imageNamed:@"messageBubbleGreen"] stretchableImageWithLeftCapWidth:15 topCapHeight:13]];
-        self.labelText.frame = CGRectMake(width-size.width-22.0f,
-										  kMessageFontSize-9.0f, size.width+5.0f, size.height);
 		self.imageBackground.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+		
+        self.labelText.frame = CGRectMake(width-size.width-22.0f, kMessageFontSize-9.0f, size.width+5.0f, size.height);
         self.labelText.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 		[self.labelText setText:params[@"text"]];
+		
 		// TODO: parametrize
-		self.labelTimestamp.frame = CGRectMake(70.0f,
-											   size.height - 15, 50, 30);
+		self.labelTimestamp.frame = CGRectMake(70.0f, size.height - 15, 50, 30);
 		[self.labelTimestamp setFont:[UIFont boldSystemFontOfSize:13]];
 		[self.labelTimestamp setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
 		[self.labelTimestamp setBackgroundColor:[UIColor clearColor]];
@@ -79,17 +79,29 @@
 		self.imageBackground.frame = CGRectMake(0.0f, kMessageFontSize-13.0f,
 												size.width+34.0f, size.height+12.0f);
         [self.imageBackground setImage:[[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23 topCapHeight:15]];
+		self.imageBackground.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+
         self.labelText.frame = CGRectMake(22.0f, kMessageFontSize-9.0f, size.width+5.0f, size.height);
-        self.imageBackground.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         self.labelText.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		[self.labelText setText:params[@"text"]];
 		
-		self.labelTimestamp.frame = CGRectMake(215.0f,
-											   size.height - 15, 50, 30);
+		self.labelTimestamp.frame = CGRectMake(215.0f, size.height - 15, 50, 30);
 		[self.labelTimestamp setFont:[UIFont boldSystemFontOfSize:13]];
 		[self.labelTimestamp setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
 		[self.labelTimestamp setBackgroundColor:[UIColor clearColor]];
 		self.labelTimestamp.text = params[@"date"];
+	}
+	
+	if (type == AMBubbleCellTimestamp) {
+		self.labelText.frame = self.frame;
+		[self.labelText setTextAlignment:NSTextAlignmentCenter];
+        [self.labelText setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+		[self.labelText setFont:[UIFont boldSystemFontOfSize:13]];
+		[self.labelText setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
+		[self.labelText setText:params[@"text"]];
+		[self.imageBackground setFrame:CGRectZero];
+		[self.labelTimestamp setFrame:CGRectZero];
+		self.labelText.text = params[@"date"];
 	}
 }
 
