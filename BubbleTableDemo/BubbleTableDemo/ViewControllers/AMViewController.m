@@ -87,6 +87,11 @@
 	[super reloadTableScrollingToBottom:YES];
 }
 
+- (NSString*)usernameForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return @"User";
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

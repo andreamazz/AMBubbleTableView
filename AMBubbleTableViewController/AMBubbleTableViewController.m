@@ -197,8 +197,9 @@
 		[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"date": stringDate }];
 	} else {
 		[self.dateFormatter setDateFormat:@"HH:mm"];					// 13:23
+		NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
 		stringDate = [self.dateFormatter stringFromDate:date];
-		[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"text": text, @"date": stringDate }];
+		[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"text": text, @"date": stringDate, @"username": (username?username:@"") }];
 	}
 	
 	return cell;
@@ -220,7 +221,14 @@
 				   constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
 					   lineBreakMode:NSLineBreakByWordWrapping];
 	
-    return size.height + 17.0f;
+	// TODO: account for username longer than the text
+	float offset = 0;
+	NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
+	if (username && ![username isEqualToString:@""]) {
+		offset = 30;
+	}
+	
+    return size.height + 17.0f + offset;
 }
 
 #pragma mark - Keyboard Handlers
@@ -370,6 +378,12 @@
 		[_dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[[NSLocale currentLocale] localeIdentifier]]];
 	}
 	return _dateFormatter;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[self.tableView setNeedsDisplay];
+	[self.tableView reloadData];
 }
 
 @end
