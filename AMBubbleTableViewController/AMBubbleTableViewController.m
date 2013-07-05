@@ -209,7 +209,7 @@
 {
 	AMBubbleCellType type = [self.dataSource cellTypeForRowAtIndexPath:indexPath];
 	NSString* text = [self.dataSource textForRowAtIndexPath:indexPath];
-	
+	NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
 	
 	if (type == AMBubbleCellTimestamp) {
 		// TODO: parametrize
@@ -221,14 +221,15 @@
 				   constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
 					   lineBreakMode:NSLineBreakByWordWrapping];
 	
-	// TODO: account for username longer than the text
-	float offset = 0;
-	NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
-	if (username && ![username isEqualToString:@""]) {
-		offset = 30;
+	CGSize usernameSize = CGSizeZero;
+	
+	if (![username isEqualToString:@""] && type == AMBubbleCellReceived) {
+		usernameSize = [username sizeWithFont:[UIFont boldSystemFontOfSize:13]
+							constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
+								lineBreakMode:NSLineBreakByWordWrapping];
 	}
 	
-    return size.height + 17.0f + offset;
+    return size.height + 17.0f + usernameSize.height;
 }
 
 #pragma mark - Keyboard Handlers
