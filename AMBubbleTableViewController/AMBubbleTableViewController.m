@@ -43,12 +43,7 @@
 - (NSMutableDictionary*)options
 {
 	if (_options == nil) {
-		_options = [[NSMutableDictionary alloc]
-					initWithDictionary:
-					@{
-					// Default options
-					AMOptionsTableStyle : @(AMBubbleTableCellDefault)
-					}];
+		_options = [[AMBubbleGlobals defaultOptions] mutableCopy];
 	}
 	return _options;
 }
@@ -178,28 +173,37 @@
 {
 	AMBubbleCellType type = [self.dataSource cellTypeForRowAtIndexPath:indexPath];
 	NSString* cellID = [NSString stringWithFormat:@"cell_%d", type];
-	
-	AMBubbleTableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-	
-	// TODO: parametrize style
-	if (cell == nil) {
-		cell = [[AMBubbleTableCell alloc] initWithStyle:AMBubbleTableCellDefault reuseIdentifier:cellID];
-	}
-	
 	NSString* text = [self.dataSource textForRowAtIndexPath:indexPath];
 	NSDate* date = [self.dataSource timestampForRowAtIndexPath:indexPath];
+	AMBubbleTableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+	UIImage* avatar = [self.dataSource avatarForRowAtIndexPath:indexPath];
 	
+	if (cell == nil) {
+		cell = [[AMBubbleTableCell alloc] initWithStyle:[self.options[AMOptionsTableStyle] intValue]
+												options:self.options
+										reuseIdentifier:cellID];
+	}
+		
 	NSString* stringDate;
 	if (type == AMBubbleCellTimestamp) {
 		[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];	// Jan 1, 2000
 		[self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];	// 1:23 PM
 		stringDate = [self.dateFormatter stringFromDate:date];
-		[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"date": stringDate }];
+		[cell setupCellWithType:type
+					  withWidth:self.tableView.frame.size.width
+					  andParams:@{ @"date": stringDate }];
 	} else {
 		[self.dateFormatter setDateFormat:@"HH:mm"];					// 13:23
 		NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
 		stringDate = [self.dateFormatter stringFromDate:date];
-		[cell setupCellWithType:type withWidth:self.tableView.frame.size.width andParams:@{ @"text": text, @"date": stringDate, @"username": (username?username:@"") }];
+		[cell setupCellWithType:type
+					  withWidth:self.tableView.frame.size.width
+					  andParams:@{
+		 @"text": text,
+		 @"date": stringDate,
+		 @"username": (username ? username : @""),
+		 @"avatar": (avatar ? avatar: @"")
+		 }];
 	}
 	
 	return cell;

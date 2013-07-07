@@ -34,5 +34,25 @@ typedef enum {
 - (void)didSendText:(NSString*)text;
 @end
 
-// Options
+/* Options */
+
+// The general style of the table.
 FOUNDATION_EXPORT NSString *const AMOptionsTableStyle;
+
+// Enables the short timestamp for every single message
+FOUNDATION_EXPORT NSString *const AMOptionsTimestampEachMessage;
+
+// Short Timestamp font
+FOUNDATION_EXPORT NSString *const AMOptionsTimestampShortFont;
+
+// Full timestamp font
+FOUNDATION_EXPORT NSString *const AMOptionsTimestampFont;
+
+// Avatar size
+FOUNDATION_EXPORT NSString *const AMOptionsAvatarSize;
+
+@interface AMBubbleGlobals : NSObject
+
++ (NSDictionary*)defaultOptions;
+
+@end

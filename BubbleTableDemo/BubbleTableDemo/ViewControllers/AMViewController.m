@@ -27,8 +27,6 @@
 	self.data = [[NSMutableArray alloc] initWithArray:@[
 				 @{@"text": @"He felt that his whole life was some kind of dream and he sometimes wondered whose it was and whether they were enjoying it.",
 				 @"date": [NSDate date], @"type": @(AMBubbleCellReceived)},
-				 @{@"text": @"Don't Panic.",
-				 @"date": [NSDate date], @"type": @(AMBubbleCellReceived)},
 				 @{@"date": [NSDate date], @"type": @(AMBubbleCellTimestamp)},
 				 @{@"text": @"I'd far rather be happy than right any day.",
 				 @"date": [NSDate date], @"type": @(AMBubbleCellReceived)},
@@ -43,9 +41,9 @@
 				 ]
 				 ];
 	
-	[self setBubbleTableOptions:@{
-			AMOptionsTableStyle: @(AMBubbleTableCellDefault)
+	[self setBubbleTableOptions:@{AMOptionsTableStyle: @(AMBubbleTableCellDefault)
 	 }];
+
 	
 	// Call super after setting up the options
 	[super viewDidLoad];
@@ -71,6 +69,14 @@
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return [NSDate date];
+}
+
+- (UIImage*)avatarForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if ([self.data[indexPath.row][@"type"] intValue] == AMBubbleCellSent) {
+		return [UIImage imageNamed:@"avatar"];
+	}
+	return nil;
 }
 
 #pragma mark - AMBubbleTableDelegate

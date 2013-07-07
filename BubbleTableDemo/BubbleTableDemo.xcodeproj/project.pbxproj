@@ -43,6 +43,9 @@
 		6553933F1780646500C09726 /* messageBubbleTyping.png in Resources */ = {isa = PBXBuildFile; fileRef = 655393261780646500C09726 /* messageBubbleTyping.png */; };
 		655393401780646500C09726 /* messageBubbleTyping@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 655393271780646500C09726 /* messageBubbleTyping@2x.png */; };
 		655393441780648D00C09726 /* AMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655393431780648D00C09726 /* AMViewController.m */; };
+		65C0489C17881C270057C421 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C0489A17881C270057C421 /* avatar.png */; };
+		65C0489D17881C270057C421 /* avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C0489B17881C270057C421 /* avatar@2x.png */; };
+		65C048A0178883A70057C421 /* AMBubbleAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0489F178883A60057C421 /* AMBubbleAccessoryView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +93,10 @@
 		655393271780646500C09726 /* messageBubbleTyping@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleTyping@2x.png"; sourceTree = "<group>"; };
 		655393421780648D00C09726 /* AMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMViewController.h; sourceTree = "<group>"; };
 		655393431780648D00C09726 /* AMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMViewController.m; sourceTree = "<group>"; };
+		65C0489A17881C270057C421 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
+		65C0489B17881C270057C421 /* avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar@2x.png"; sourceTree = "<group>"; };
+		65C0489E178883A60057C421 /* AMBubbleAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBubbleAccessoryView.h; sourceTree = "<group>"; };
+		65C0489F178883A60057C421 /* AMBubbleAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBubbleAccessoryView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +148,7 @@
 				655392BF17802FF600C09726 /* AMAppDelegate.h */,
 				655392C017802FF600C09726 /* AMAppDelegate.m */,
 				655392C817802FF600C09726 /* MainStoryboard.storyboard */,
+				65C0489917881C270057C421 /* Resources */,
 				655392B717802FF600C09726 /* Supporting Files */,
 			);
 			path = BubbleTableDemo;
@@ -170,6 +178,8 @@
 				6553930F1780646500C09726 /* AMBubbleTableViewController.h */,
 				655393101780646500C09726 /* AMBubbleTableViewController.m */,
 				655393111780646500C09726 /* Resources */,
+				65C0489E178883A60057C421 /* AMBubbleAccessoryView.h */,
+				65C0489F178883A60057C421 /* AMBubbleAccessoryView.m */,
 			);
 			name = AMBubbleTableViewController;
 			path = ../../AMBubbleTableViewController;
@@ -211,6 +221,15 @@
 				655393431780648D00C09726 /* AMViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		65C0489917881C270057C421 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				65C0489A17881C270057C421 /* avatar.png */,
+				65C0489B17881C270057C421 /* avatar@2x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +311,8 @@
 				6553933E1780646500C09726 /* messageBubbleHighlighted@2x.png in Resources */,
 				6553933F1780646500C09726 /* messageBubbleTyping.png in Resources */,
 				655393401780646500C09726 /* messageBubbleTyping@2x.png in Resources */,
+				65C0489C17881C270057C421 /* avatar.png in Resources */,
+				65C0489D17881C270057C421 /* avatar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +329,7 @@
 				655393291780646500C09726 /* AMBubbleTableCell.m in Sources */,
 				6553932A1780646500C09726 /* AMBubbleTableViewController.m in Sources */,
 				655393441780648D00C09726 /* AMViewController.m in Sources */,
+				65C048A0178883A70057C421 /* AMBubbleAccessoryView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
