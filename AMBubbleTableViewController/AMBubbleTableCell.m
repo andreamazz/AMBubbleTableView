@@ -66,15 +66,15 @@
 	[self.labelText setNumberOfLines:0];
 
 	[self.bubbleAccessory setupView:params];
-	
-	[self.bubbleAccessory setFrame:CGRectMake(width - self.bubbleAccessory.frame.size.width - 2,
-											  0,
-											  self.bubbleAccessory.frame.size.width,
-											  self.bubbleAccessory.frame.size.height)];
-	
+		
 	// Right Bubble
 	if (type == AMBubbleCellSent) {
-		
+
+		[self.bubbleAccessory setFrame:CGRectMake(width - self.bubbleAccessory.frame.size.width - 2,
+												  0,
+												  self.bubbleAccessory.frame.size.width,
+												  self.bubbleAccessory.frame.size.height)];
+	
 		CGRect rect = CGRectMake(width - sizeText.width - 34.0f - self.bubbleAccessory.frame.size.width,
 								 kMessageFontSize - 13.0f,
 								 sizeText.width + 34.0f,
@@ -100,6 +100,9 @@
 	
 	if (type == AMBubbleCellReceived) {
 		
+		// TODO: remove
+		[self.bubbleAccessory setFrame:CGRectZero];
+		 
 		CGSize usernameSize = CGSizeZero;
 		
 		if (![params[@"username"] isEqualToString:@""]) {
@@ -129,6 +132,9 @@
 	}
 	
 	if (type == AMBubbleCellTimestamp) {
+		
+		[self.bubbleAccessory setFrame:CGRectZero];
+		
 		self.labelText.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 		[self.labelText setTextAlignment:NSTextAlignmentCenter];
         [self.labelText setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];

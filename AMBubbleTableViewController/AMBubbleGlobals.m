@@ -13,6 +13,9 @@ NSString *const AMOptionsTimestampEachMessage = @"AMOptionsTimestampEachMessage"
 NSString *const AMOptionsTimestampShortFont = @"AMOptionsTimestampShortFont";
 NSString *const AMOptionsTimestampFont = @"AMOptionsTimestampFont";
 NSString *const AMOptionsAvatarSize = @"AMOptionsAvatarSize";
+NSString *const AMOptionsAccessorySize = @"AMOptionsAccessorySize";
+NSString *const AMOptionsAccessoryMargin = @"AMOptionsAccessoryMargin";
+NSString *const AMOptionsTimestampHeight = @"AMOptionsTimestampHeight";
 
 @implementation AMBubbleGlobals
 
@@ -23,7 +26,10 @@ NSString *const AMOptionsAvatarSize = @"AMOptionsAvatarSize";
 	AMOptionsTimestampEachMessage : @YES,
 	AMOptionsTimestampShortFont: [UIFont boldSystemFontOfSize:11],
 	AMOptionsTimestampFont: [UIFont boldSystemFontOfSize:13],
-	AMOptionsAvatarSize: @50
+	AMOptionsAvatarSize: @50,
+	AMOptionsAccessorySize: @50,
+	AMOptionsAccessoryMargin: @5,
+	AMOptionsTimestampHeight: @40
 	};
 }
 

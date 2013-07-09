@@ -216,8 +216,7 @@
 	NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
 	
 	if (type == AMBubbleCellTimestamp) {
-		// TODO: parametrize
-		return 40;
+		return [self.options[AMOptionsTimestampHeight] floatValue];
 	}
     
     // Set MessageCell height.
@@ -233,7 +232,9 @@
 								lineBreakMode:NSLineBreakByWordWrapping];
 	}
 	
-    return size.height + 17.0f + usernameSize.height;
+	// Account for either the bubble or accessory size
+    return MAX(size.height + 17.0f + usernameSize.height,
+			   [self.options[AMOptionsAccessorySize] floatValue] + [self.options[AMOptionsAccessoryMargin] floatValue]);
 }
 
 #pragma mark - Keyboard Handlers
@@ -362,6 +363,7 @@
 {
 	[self.delegate didSendText:self.textView.text];
 	[self.textView setText:@""];
+	[self textViewDidChange:self.textView];
 	[self resizeTextViewByHeight:self.textView.contentSize.height - self.previousTextFieldHeight];
 	self.previousTextFieldHeight = self.textView.contentSize.height;
     [self.buttonSend setEnabled:NO];

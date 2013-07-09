@@ -27,6 +27,8 @@
     if (self) {
 		self.options = options;
 		
+		[self setClipsToBounds:YES];
+		
 		self.imageAvatar = [[UIImageView alloc] init];
 		self.labelTimestamp = [[UILabel alloc] init];
 		[self addSubview:self.imageAvatar];
@@ -39,7 +41,6 @@
 
 		[self.labelTimestamp setFont:self.options[AMOptionsTimestampShortFont]];
 		[self.labelTimestamp setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
-		[self.labelTimestamp setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }

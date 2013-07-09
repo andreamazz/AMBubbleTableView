@@ -51,6 +51,15 @@ FOUNDATION_EXPORT NSString *const AMOptionsTimestampFont;
 // Avatar size
 FOUNDATION_EXPORT NSString *const AMOptionsAvatarSize;
 
+// Accessory view size. Needed to get the cell height, adjust this when using a custom BubbleAccessory. The default view defaults to the Avatar Size
+FOUNDATION_EXPORT NSString *const AMOptionsAccessorySize;
+
+// Margin height for the bubble accessory view
+FOUNDATION_EXPORT NSString *const AMOptionsAccessoryMargin;
+
+// Full timestamp height
+FOUNDATION_EXPORT NSString *const AMOptionsTimestampHeight;
+
 @interface AMBubbleGlobals : NSObject
 
 + (NSDictionary*)defaultOptions;
