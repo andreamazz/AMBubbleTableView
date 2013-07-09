@@ -41,6 +41,7 @@
 
 		[self.labelTimestamp setFont:self.options[AMOptionsTimestampShortFont]];
 		[self.labelTimestamp setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
+		// TODO: labetTimestamp background
     }
     return self;
 }
@@ -59,6 +60,8 @@
 							   constrainedToSize:CGSizeMake(50, CGFLOAT_MAX)
 								   lineBreakMode:NSLineBreakByWordWrapping];
 	}
+	
+	// TODO: reduce to 0 the size when no avatar or timestamp is included
 	
 	[self.imageAvatar setFrame:CGRectMake(0,
 										  0,

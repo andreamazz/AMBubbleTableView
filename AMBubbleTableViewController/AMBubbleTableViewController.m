@@ -175,6 +175,7 @@
 	NSString* cellID = [NSString stringWithFormat:@"cell_%d", type];
 	NSString* text = [self.dataSource textForRowAtIndexPath:indexPath];
 	NSDate* date = [self.dataSource timestampForRowAtIndexPath:indexPath];
+	UIColor* color = [self.dataSource usernameColorForRowAtIndexPath:indexPath];
 	AMBubbleTableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	UIImage* avatar = [self.dataSource avatarForRowAtIndexPath:indexPath];
 	
@@ -202,7 +203,8 @@
 		 @"text": text,
 		 @"date": stringDate,
 		 @"username": (username ? username : @""),
-		 @"avatar": (avatar ? avatar: @"")
+		 @"avatar": (avatar ? avatar: @""),
+		 @"color": (color ? color: @"")
 		 }];
 	}
 	

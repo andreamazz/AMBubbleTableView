@@ -28,6 +28,7 @@ typedef enum {
 @optional
 - (UIImage*)avatarForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSString*)usernameForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UIColor*)usernameColorForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @protocol AMBubbleTableDelegate <NSObject>

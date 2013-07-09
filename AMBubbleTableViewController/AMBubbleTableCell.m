@@ -43,7 +43,7 @@
 		self.bubbleAccessory = [[AMBubbleAccessoryView alloc] initWithOptions:options];
 		[self.contentView addSubview:self.imageBackground];
 		[self.imageBackground addSubview:self.labelText];
-		[self.contentView addSubview:self.labelUsername];
+		[self.imageBackground addSubview:self.labelUsername];
 		[self.contentView addSubview:self.bubbleAccessory];
     }
     return self;
@@ -66,7 +66,7 @@
 	[self.labelText setNumberOfLines:0];
 
 	[self.bubbleAccessory setupView:params];
-		
+	
 	// Right Bubble
 	if (type == AMBubbleCellSent) {
 
@@ -74,7 +74,7 @@
 												  0,
 												  self.bubbleAccessory.frame.size.width,
 												  self.bubbleAccessory.frame.size.height)];
-	
+		
 		CGRect rect = CGRectMake(width - sizeText.width - 34.0f - self.bubbleAccessory.frame.size.width,
 								 kMessageFontSize - 13.0f,
 								 sizeText.width + 34.0f,
@@ -100,9 +100,10 @@
 	
 	if (type == AMBubbleCellReceived) {
 		
-		// TODO: remove
-		[self.bubbleAccessory setFrame:CGRectZero];
-		 
+		[self.bubbleAccessory setFrame:CGRectMake(2,
+												  0,
+												  self.bubbleAccessory.frame.size.width,
+												  self.bubbleAccessory.frame.size.height)];
 		CGSize usernameSize = CGSizeZero;
 		
 		if (![params[@"username"] isEqualToString:@""]) {
@@ -112,10 +113,18 @@
 		}
 		
 		// TODO: account for username longer than the text
-		CGRect rect = CGRectMake(0.0f,
+		CGRect rect = CGRectMake(0.0f + self.bubbleAccessory.frame.size.width,
 								 kMessageFontSize - 13.0f,
 								 sizeText.width + 34.0f,
 								 sizeText.height + 12.0f + usernameSize.height);
+		
+		if (rect.size.height > self.bubbleAccessory.frame.size.height) {
+			CGRect frame = self.bubbleAccessory.frame;
+			frame.origin.y += rect.size.height - self.bubbleAccessory.frame.size.height;
+			self.bubbleAccessory.frame = frame;
+		} else {
+			rect.origin.y += self.bubbleAccessory.frame.size.height - rect.size.height;
+		}
 		
 		[self setupBubbleWithType:type
 					   background:rect
@@ -127,6 +136,9 @@
 			[self.labelUsername setFont:[UIFont boldSystemFontOfSize:13]];
 			[self.labelUsername setTextColor:[UIColor redColor]];
 			[self.labelUsername setBackgroundColor:[UIColor clearColor]];
+			if ([params[@"color"] isKindOfClass:[UIColor class]]) {
+				[self.labelUsername setTextColor:params[@"color"]];
+			}
 			self.labelUsername.text = params[@"username"];
 		}
 	}
