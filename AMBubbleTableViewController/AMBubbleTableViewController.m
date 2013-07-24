@@ -175,9 +175,18 @@
 	NSString* cellID = [NSString stringWithFormat:@"cell_%d", type];
 	NSString* text = [self.dataSource textForRowAtIndexPath:indexPath];
 	NSDate* date = [self.dataSource timestampForRowAtIndexPath:indexPath];
-	UIColor* color = [self.dataSource usernameColorForRowAtIndexPath:indexPath];
 	AMBubbleTableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-	UIImage* avatar = [self.dataSource avatarForRowAtIndexPath:indexPath];
+	
+	UIImage* avatar;
+	UIColor* color;
+	
+	if ([self.dataSource respondsToSelector:@selector(usernameColorForRowAtIndexPath:)]) {
+		color = [self.dataSource usernameColorForRowAtIndexPath:indexPath];
+	}
+	if ([self.dataSource respondsToSelector:@selector(avatarForRowAtIndexPath:)]) {
+		avatar = [self.dataSource avatarForRowAtIndexPath:indexPath];
+	}
+
 	
 	if (cell == nil) {
 		cell = [[AMBubbleTableCell alloc] initWithStyle:[self.options[AMOptionsTableStyle] intValue]
@@ -195,7 +204,10 @@
 					  andParams:@{ @"date": stringDate }];
 	} else {
 		[self.dateFormatter setDateFormat:@"HH:mm"];					// 13:23
-		NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
+		NSString* username;
+		if ([self.dataSource respondsToSelector:@selector(usernameForRowAtIndexPath:)]) {
+			username = [self.dataSource usernameForRowAtIndexPath:indexPath];
+		}
 		stringDate = [self.dateFormatter stringFromDate:date];
 		[cell setupCellWithType:type
 					  withWidth:self.tableView.frame.size.width

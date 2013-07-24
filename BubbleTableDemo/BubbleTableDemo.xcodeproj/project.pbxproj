@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65035BA2178EBDEA00970C87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65035BA1178EBDEA00970C87 /* QuartzCore.framework */; };
 		655392B117802FF600C09726 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655392B017802FF600C09726 /* UIKit.framework */; };
 		655392B317802FF600C09726 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655392B217802FF600C09726 /* Foundation.framework */; };
 		655392B517802FF600C09726 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655392B417802FF600C09726 /* CoreGraphics.framework */; };
@@ -43,12 +44,15 @@
 		6553933F1780646500C09726 /* messageBubbleTyping.png in Resources */ = {isa = PBXBuildFile; fileRef = 655393261780646500C09726 /* messageBubbleTyping.png */; };
 		655393401780646500C09726 /* messageBubbleTyping@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 655393271780646500C09726 /* messageBubbleTyping@2x.png */; };
 		655393441780648D00C09726 /* AMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655393431780648D00C09726 /* AMViewController.m */; };
+		658779E4179FDCC10086BD1F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 658779E3179FDCC10086BD1F /* Icon.png */; };
+		658779E6179FDCC40086BD1F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658779E5179FDCC40086BD1F /* Icon@2x.png */; };
 		65C0489C17881C270057C421 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C0489A17881C270057C421 /* avatar.png */; };
 		65C0489D17881C270057C421 /* avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C0489B17881C270057C421 /* avatar@2x.png */; };
 		65C048A0178883A70057C421 /* AMBubbleAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0489F178883A60057C421 /* AMBubbleAccessoryView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65035BA1178EBDEA00970C87 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		655392AD17802FF600C09726 /* BubbleTableDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleTableDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		655392B017802FF600C09726 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		655392B217802FF600C09726 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +97,8 @@
 		655393271780646500C09726 /* messageBubbleTyping@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleTyping@2x.png"; sourceTree = "<group>"; };
 		655393421780648D00C09726 /* AMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMViewController.h; sourceTree = "<group>"; };
 		655393431780648D00C09726 /* AMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMViewController.m; sourceTree = "<group>"; };
+		658779E3179FDCC10086BD1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		658779E5179FDCC40086BD1F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		65C0489A17881C270057C421 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		65C0489B17881C270057C421 /* avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar@2x.png"; sourceTree = "<group>"; };
 		65C0489E178883A60057C421 /* AMBubbleAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBubbleAccessoryView.h; sourceTree = "<group>"; };
@@ -104,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65035BA2178EBDEA00970C87 /* QuartzCore.framework in Frameworks */,
 				655392B117802FF600C09726 /* UIKit.framework in Frameworks */,
 				655392B317802FF600C09726 /* Foundation.framework in Frameworks */,
 				655392B517802FF600C09726 /* CoreGraphics.framework in Frameworks */,
@@ -116,6 +123,8 @@
 		655392A417802FF600C09726 = {
 			isa = PBXGroup;
 			children = (
+				658779E5179FDCC40086BD1F /* Icon@2x.png */,
+				658779E3179FDCC10086BD1F /* Icon.png */,
 				655392B617802FF600C09726 /* BubbleTableDemo */,
 				655392AF17802FF600C09726 /* Frameworks */,
 				655392AE17802FF600C09726 /* Products */,
@@ -133,6 +142,7 @@
 		655392AF17802FF600C09726 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65035BA1178EBDEA00970C87 /* QuartzCore.framework */,
 				655392B017802FF600C09726 /* UIKit.framework */,
 				655392B217802FF600C09726 /* Foundation.framework */,
 				655392B417802FF600C09726 /* CoreGraphics.framework */,
@@ -313,6 +323,8 @@
 				655393401780646500C09726 /* messageBubbleTyping@2x.png in Resources */,
 				65C0489C17881C270057C421 /* avatar.png in Resources */,
 				65C0489D17881C270057C421 /* avatar@2x.png in Resources */,
+				658779E4179FDCC10086BD1F /* Icon.png in Resources */,
+				658779E6179FDCC40086BD1F /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@ NSString *const AMOptionsTimestampEachMessage = @"AMOptionsTimestampEachMessage"
 NSString *const AMOptionsTimestampShortFont = @"AMOptionsTimestampShortFont";
 NSString *const AMOptionsTimestampFont = @"AMOptionsTimestampFont";
 NSString *const AMOptionsAvatarSize = @"AMOptionsAvatarSize";
+NSString *const AMOptionsAccessoryClass = @"AMOptionsAccessoryClass";
 NSString *const AMOptionsAccessorySize = @"AMOptionsAccessorySize";
 NSString *const AMOptionsAccessoryMargin = @"AMOptionsAccessoryMargin";
 NSString *const AMOptionsTimestampHeight = @"AMOptionsTimestampHeight";
@@ -24,6 +25,7 @@ NSString *const AMOptionsTimestampHeight = @"AMOptionsTimestampHeight";
 	return @{
 		  AMOptionsTableStyle : @(AMBubbleTableCellDefault),
 	AMOptionsTimestampEachMessage : @YES,
+	AMOptionsAccessoryClass: @"AMBubbleAccessoryView",
 	AMOptionsTimestampShortFont: [UIFont boldSystemFontOfSize:11],
 	AMOptionsTimestampFont: [UIFont boldSystemFontOfSize:13],
 	AMOptionsAvatarSize: @50,

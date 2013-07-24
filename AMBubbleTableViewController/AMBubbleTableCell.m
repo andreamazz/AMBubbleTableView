@@ -13,8 +13,6 @@
 // TODO: parametrize
 #define kMessageFontSize 15
 
-
-
 @interface AMBubbleTableCell ()
 
 @property (nonatomic, weak)   NSDictionary* options;
@@ -22,7 +20,7 @@
 @property (nonatomic, strong) UIImageView*	imageBackground;
 @property (nonatomic, strong) UILabel*		labelUsername;
 @property (nonatomic, assign) AMBubbleTableCellStyle bubbleStyle;
-@property (nonatomic, strong) AMBubbleAccessoryView* bubbleAccessory;
+@property (nonatomic, strong) UIView<AMBubbleAccessory>*		bubbleAccessory;
 
 @end
 
@@ -40,7 +38,8 @@
 		self.labelText = [[UILabel alloc] init];
 		self.imageBackground = [[UIImageView alloc] init];
 		self.labelUsername = [[UILabel alloc] init];
-		self.bubbleAccessory = [[AMBubbleAccessoryView alloc] initWithOptions:options];
+		self.bubbleAccessory = [[NSClassFromString(options[AMOptionsAccessoryClass]) alloc] init];
+		[self.bubbleAccessory setOptions:options];
 		[self.contentView addSubview:self.imageBackground];
 		[self.imageBackground addSubview:self.labelText];
 		[self.imageBackground addSubview:self.labelUsername];

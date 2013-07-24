@@ -35,6 +35,12 @@ typedef enum {
 - (void)didSendText:(NSString*)text;
 @end
 
+@protocol AMBubbleAccessory <NSObject>
+@required
+- (id)setOptions:(NSDictionary*)options;
+- (void)setupView:(NSDictionary*)params;
+@end
+
 /* Options */
 
 // The general style of the table.
@@ -51,6 +57,9 @@ FOUNDATION_EXPORT NSString *const AMOptionsTimestampFont;
 
 // Avatar size
 FOUNDATION_EXPORT NSString *const AMOptionsAvatarSize;
+
+// Accessory class. Pass your custom accessory view's name as string
+FOUNDATION_EXPORT NSString *const AMOptionsAccessoryClass;
 
 // Accessory view size. Needed to get the cell height, adjust this when using a custom BubbleAccessory. The default view defaults to the Avatar Size
 FOUNDATION_EXPORT NSString *const AMOptionsAccessorySize;

@@ -6,11 +6,8 @@
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AMBubbleGlobals.h"
 
-@interface AMBubbleAccessoryView : UIView
-
-- (id)initWithOptions:(NSDictionary*)options;
-- (void)setupView:(NSDictionary*)params;
+@interface AMBubbleAccessoryView : UIView<AMBubbleAccessory>
 
 @end

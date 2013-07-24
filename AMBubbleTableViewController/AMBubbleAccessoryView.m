@@ -21,11 +21,10 @@
 
 @implementation AMBubbleAccessoryView
 
-- (id)initWithOptions:(NSDictionary*)options
+- (id)init
 {
     self = [super init];
     if (self) {
-		self.options = options;
 		
 		[self setClipsToBounds:YES];
 		
@@ -39,11 +38,21 @@
 		self.imageAvatar.layer.borderColor = [UIColor lightGrayColor].CGColor;
 		self.imageAvatar.layer.borderWidth = 1.0;
 
-		[self.labelTimestamp setFont:self.options[AMOptionsTimestampShortFont]];
 		[self.labelTimestamp setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
-		// TODO: labetTimestamp background
+
+		// TODO: parametrize... or not
+		self.labelTimestamp.shadowColor = [UIColor whiteColor];
+		self.labelTimestamp.shadowOffset = CGSizeMake(0, 1.0);
+		
+//		[self.labelTimestamp setBackgroundColor:[UIColor clearColor]];
     }
     return self;
+}
+
+- (void)setOptions:(NSDictionary *)options
+{
+	_options = options;
+	[self.labelTimestamp setFont:self.options[AMOptionsTimestampShortFont]];
 }
 
 - (void)setupView:(NSDictionary*)params
@@ -69,8 +78,8 @@
 										  [self.options[AMOptionsAvatarSize] floatValue])
 	 ];
 	
-	[self.labelTimestamp setFrame:CGRectMake(0,
-											 0,
+	[self.labelTimestamp setFrame:CGRectMake([self.options[AMOptionsAvatarSize] floatValue] - sizeTime.width,
+											 [self.options[AMOptionsAvatarSize] floatValue] - sizeTime.height,
 											 sizeTime.width,
 											 sizeTime.height)
 	 ];

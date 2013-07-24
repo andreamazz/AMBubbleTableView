@@ -1,7 +1,7 @@
 AMBubbleTableViewController
 ==================
 
-Simple implementation of a UITableView styled as with chat bubbles. It's strongly based on Jesse Squires'  [MessagesTableViewController](https://github.com/jessesquires/MessagesTableViewController), since I needed to deeply customize the view, I decided to spawn a new library.  
+Simple implementation of a UITableView styled as chat bubbles. It's strongly based on Jesse Squires'  [MessagesTableViewController](https://github.com/jessesquires/MessagesTableViewController), since I needed to deeply customize the view, I decided to spawn a new library.  
 
 Screenshot
 --------------------
@@ -51,24 +51,42 @@ Implement the delegate to receive the user's text:
 - (void)didSendText:(NSString*)text;
 ```
 
+Custom accessory view
+--------------------
+AMBubbleTableViewController uses a second accessory view (it's separate from the standard accessory view) to display the avatar and the timestamp. You can customize this view by passing your accessory class in the options dictionary. Your class just needs to be a UIView's subclass and implement ```AMBubbleAccessory``` protocol:
+
+```objc
+- (id)setOptions:(NSDictionary*)options;
+- (void)setupView:(NSDictionary*)params;
+```
+
+Where params is a dictionary containing the UIImage ```@"avatar"``` and the NSString ```@"date"```.
+
 Options Dictionary
 --------------------
 The AMBubbleTableViewController configuration can be handled by passing an NSDictionary to it. The default values can be found in  AMBubbleGlobals.m. Here's a brief description of the possible options:
 
 ```objc
-AMOptionsTableStyle             // @(AMBubbleTableCellStyle), Sets the table style. Defaults to AMBubbleTableCellDefault
-AMOptionsTimestampEachMessage   // @(BOOL), Enables the timestamp for each message. Defaults to YES
+AMOptionsTableStyle             // @(AMBubbleTableCellStyle), Sets the table style. Defaults to AMBubbleTableCellDefault.
+AMOptionsTimestampEachMessage   // @(BOOL), Enables the timestamp for each message. Defaults to @YES.
 AMOptionsTimestampShortFont     // UIFont, Sets the short timestamp font. 
 AMOptionsTimestampFont          // UIFont, Sets the full timestamp font.
-AMOptionsAvatarSize             // @(float), The avatar size. Defaults to 50.
-AMOptionsAccessorySize          // @(float), The accssory view size (used to compute the minimum cell height). Defaults to 50
-AMOptionsAccessoryMargin        // @(float), The accessory view margin. Defaults to 5.
-AMOptionsTimestampHeight        // @(float), the height of the timestamp row. Defaults to 40.
+AMOptionsAvatarSize             // @(float), The avatar size. Defaults to @50.
+AMOptionsAccessoryClass         // NSString, The accessory view for each cell. Defaults to @"AMBubbleAccessoryView".
+AMOptionsAccessorySize          // @(float), The accssory view size (used to compute the minimum cell height). Defaults to @50.
+AMOptionsAccessoryMargin        // @(float), The accessory view margin. Defaults to @5.
+AMOptionsTimestampHeight        // @(float), The height of the timestamp row. Defaults to @40.
 ```
+
+TODO
+--------------------
+* Add further customizations
+* Add styles
+* Landscape mode
 
 MIT License
 --------------------
-	Copyright (c) 2012 Andrea Mazzini. All rights reserved.
+	Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
