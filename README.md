@@ -92,21 +92,21 @@ Styling Options
 You can also specify other styling options. AMBubbleTableViewController includes three styles, the default values of the following options differs from style to style. Check AMBubbleGlobals.m for more info.
 
 ```objc
-AMOptionsImageIncoming					// UIImage, the left bubble stretchable image
-AMOptionsImageOutgoing					// UIImage, the right bubble stretchable image
-AMOptionsImageBar								// UIImage, the text bar background, resizable with cap insets
-AMOptionsImageInput							// UIImage, the text view mask, resizable with cap insets
-AMOptionsImageButton						// UIImage, the button image, resizable with cap insets
-AMOptionsImageButtonHighlight		// UIImage, the highlighted button image, resizable with cap insets
-AMOptionsTextFieldBackground		// UIColor, the textView color
-AMOptionsTextFieldFont					// UIFont, the textView font
-AMOptionsTextFieldFontColor			// UIColor, the textView font color
-AMOptionsTableBackground				// UIColor, the tableView color
-AMOptionsAccessoryPosition			// @(AMBubbleAccessoryPosition), defines wether the accessory should stay up or down
-AMOptionsButtonOffset						// @(float), the vertical offset of the send button
-AMOptionsBubbleTextColor				// UIColor, the main bubble's text color
-AMOptionsBubbleTextFont					// UIFont, the main bubble's text font
-AMOptionsUsernameFont						// UIFont, the username's text font
+AMOptionsImageIncoming          // UIImage, the left bubble stretchable image
+AMOptionsImageOutgoing          // UIImage, the right bubble stretchable image
+AMOptionsImageBar               // UIImage, the text bar background, resizable with cap insets
+AMOptionsImageInput             // UIImage, the text view mask, resizable with cap insets
+AMOptionsImageButton            // UIImage, the button image, resizable with cap insets
+AMOptionsImageButtonHighlight   // UIImage, the highlighted button image, resizable with cap insets
+AMOptionsTextFieldBackground    // UIColor, the textView color
+AMOptionsTextFieldFont          // UIFont, the textView font
+AMOptionsTextFieldFontColor     // UIColor, the textView font color
+AMOptionsTableBackground        // UIColor, the tableView color
+AMOptionsAccessoryPosition      // @(AMBubbleAccessoryPosition), defines wether the accessory should stay up or down
+AMOptionsButtonOffset           // @(float), the vertical offset of the send button
+AMOptionsBubbleTextColor        // UIColor, the main bubble's text color
+AMOptionsBubbleTextFont         // UIFont, the main bubble's text font
+AMOptionsUsernameFont           // UIFont, the username's text font
 ```
 
 TODO
