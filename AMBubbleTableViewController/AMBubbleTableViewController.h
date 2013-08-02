@@ -15,5 +15,6 @@
 
 - (void)reloadTableScrollingToBottom:(BOOL)scroll;
 - (void)setBubbleTableOptions:(NSDictionary *)options;
+- (void)setTableStyle:(AMBubbleTableStyle)style;
 
 @end

@@ -19,14 +19,13 @@
 @property (nonatomic, strong) UILabel*		labelText;
 @property (nonatomic, strong) UIImageView*	imageBackground;
 @property (nonatomic, strong) UILabel*		labelUsername;
-@property (nonatomic, assign) AMBubbleTableCellStyle bubbleStyle;
 @property (nonatomic, strong) UIView<AMBubbleAccessory>*		bubbleAccessory;
 
 @end
 
 @implementation AMBubbleTableCell
 
-- (id)initWithStyle:(AMBubbleTableCellStyle)style options:(NSDictionary*)options reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithOptions:(NSDictionary*)options reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -34,7 +33,6 @@
 		self.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 		self.accessoryType = UITableViewCellAccessoryNone;
-		self.bubbleStyle = style;
 		self.labelText = [[UILabel alloc] init];
 		self.imageBackground = [[UIImageView alloc] init];
 		self.labelUsername = [[UILabel alloc] init];
@@ -51,8 +49,7 @@
 
 - (void)setupCellWithType:(AMBubbleCellType)type withWidth:(float)width andParams:(NSDictionary*)params
 {
-	// TODO: move these in the options
-	UIFont* textFont = [UIFont systemFontOfSize:15]; // TODO: add color as option
+	UIFont* textFont = self.options[AMOptionsBubbleTextFont];
 		
 	// Configure the cell to show the message in a bubble. Layout message cell & its subviews.
 	CGSize sizeText = [params[@"text"] sizeWithFont:textFont
@@ -63,7 +60,8 @@
 	[self.labelText setBackgroundColor:[UIColor clearColor]];
 	[self.labelText setFont:textFont];
 	[self.labelText setNumberOfLines:0];
-
+	[self.labelText setTextColor:self.options[AMOptionsBubbleTextColor]];
+	
 	[self.bubbleAccessory setupView:params];
 	
 	// Right Bubble
@@ -80,11 +78,17 @@
 								 sizeText.height + 12.0f);
 		
 		if (rect.size.height > self.bubbleAccessory.frame.size.height) {
-			CGRect frame = self.bubbleAccessory.frame;
-			frame.origin.y += rect.size.height - self.bubbleAccessory.frame.size.height;
-			self.bubbleAccessory.frame = frame;
+			if ([self.options[AMOptionsAccessoryPosition] intValue] == AMBubbleAccessoryDown) {
+				CGRect frame = self.bubbleAccessory.frame;
+				frame.origin.y += rect.size.height - self.bubbleAccessory.frame.size.height;
+				self.bubbleAccessory.frame = frame;
+			}
 		} else {
-			rect.origin.y += self.bubbleAccessory.frame.size.height - rect.size.height;
+			if ([self.options[AMOptionsAccessoryPosition] intValue] == AMBubbleAccessoryDown) {
+				rect.origin.y += self.bubbleAccessory.frame.size.height - rect.size.height;
+			} else {
+				rect.origin.y = 0;
+			}
 		}
 		
 		[self setupBubbleWithType:type
@@ -106,8 +110,8 @@
 		CGSize usernameSize = CGSizeZero;
 		
 		if (![params[@"username"] isEqualToString:@""]) {
-			[self.labelUsername setFont:[UIFont boldSystemFontOfSize:13]];
-			usernameSize = [params[@"username"] sizeWithFont:[UIFont boldSystemFontOfSize:13]
+			[self.labelUsername setFont:self.options[AMOptionsUsernameFont]];
+			usernameSize = [params[@"username"] sizeWithFont:self.options[AMOptionsUsernameFont]
 										   constrainedToSize:CGSizeMake(kMessageTextWidth, self.labelUsername.font.lineHeight)
 											   lineBreakMode:NSLineBreakByWordWrapping];
 			[self.labelUsername setNumberOfLines:1];
@@ -125,11 +129,17 @@
 								 sizeText.height + 12.0f + usernameSize.height);
 		
 		if (rect.size.height > self.bubbleAccessory.frame.size.height) {
-			CGRect frame = self.bubbleAccessory.frame;
-			frame.origin.y += rect.size.height - self.bubbleAccessory.frame.size.height;
-			self.bubbleAccessory.frame = frame;
+			if ([self.options[AMOptionsAccessoryPosition] intValue] == AMBubbleAccessoryDown) {
+				CGRect frame = self.bubbleAccessory.frame;
+				frame.origin.y += rect.size.height - self.bubbleAccessory.frame.size.height;
+				self.bubbleAccessory.frame = frame;
+			}
 		} else {
-			rect.origin.y += self.bubbleAccessory.frame.size.height - rect.size.height;
+			if ([self.options[AMOptionsAccessoryPosition] intValue] == AMBubbleAccessoryDown) {
+				rect.origin.y += self.bubbleAccessory.frame.size.height - rect.size.height;
+			} else {
+				rect.origin.y = 0;
+			}
 		}
 		
 		[self setupBubbleWithType:type
@@ -160,9 +170,9 @@
 	[self.imageBackground setFrame:frame];
 
 	if (type == AMBubbleCellReceived) {
-		[self.imageBackground setImage:[[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23 topCapHeight:15]];
+		[self.imageBackground setImage:self.options[AMOptionsImageIncoming]];
 	} else {
-		[self.imageBackground setImage:[[UIImage imageNamed:@"messageBubbleGreen"] stretchableImageWithLeftCapWidth:15 topCapHeight:13]];
+		[self.imageBackground setImage:self.options[AMOptionsImageOutgoing]];
 	}
 	
 	[self.imageBackground setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];

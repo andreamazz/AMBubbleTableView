@@ -10,7 +10,7 @@
 
 @interface AMBubbleTableCell : UITableViewCell
 
-- (id)initWithStyle:(AMBubbleTableCellStyle)style options:(NSDictionary*)options reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initWithOptions:(NSDictionary*)options reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)setupCellWithType:(AMBubbleCellType)type withWidth:(float)width andParams:(NSDictionary*)params;
 
 @end

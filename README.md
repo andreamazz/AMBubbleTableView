@@ -5,7 +5,8 @@ Simple implementation of a UITableView styled as chat bubbles. It's strongly bas
 
 Screenshot
 --------------------
-![SlideOutNavigation](http://www.eflatgames.com/github/AMBubbleTableView.png)
+![AMBubbleTableViewController](http://www.eflatgames.com/github/AMBubbleTableView.png)
+![AMBubbleTableViewController-Flat](http://www.eflatgames.com/github/AMBubbleTableView2.png)
 
 Setup with Cocoapods
 --------------------
@@ -51,6 +52,14 @@ Implement the delegate to receive the user's text:
 - (void)didSendText:(NSString*)text;
 ```
 
+Main styles
+--------------------
+You can change the style of the AMBubbleTableViewController like this:
+```objc
+// After initialization
+[self setTableStyle:AMBubbleTableStyleFlat];    // AMBubbleTableStyleDefault, AMBubbleTableStyleSquare, AMBubbleTableStyleFlat
+```
+
 Custom accessory view
 --------------------
 AMBubbleTableViewController uses a second accessory view (it's separate from the standard accessory view) to display the avatar and the timestamp. You can customize this view by passing your accessory class in the options dictionary. Your class just needs to be a UIView's subclass and implement ```AMBubbleAccessory``` protocol:
@@ -78,10 +87,31 @@ AMOptionsAccessoryMargin        // @(float), The accessory view margin. Defaults
 AMOptionsTimestampHeight        // @(float), The height of the timestamp row. Defaults to @40.
 ```
 
+Styling Options
+--------------------
+You can also specify other styling options. AMBubbleTableViewController includes three styles, the default values of the following options differs from style to style. Check AMBubbleGlobals.m for more info.
+
+```objc
+AMOptionsImageIncoming					// UIImage, the left bubble stretchable image
+AMOptionsImageOutgoing					// UIImage, the right bubble stretchable image
+AMOptionsImageBar								// UIImage, the text bar background, resizable with cap insets
+AMOptionsImageInput							// UIImage, the text view mask, resizable with cap insets
+AMOptionsImageButton						// UIImage, the button image, resizable with cap insets
+AMOptionsImageButtonHighlight		// UIImage, the highlighted button image, resizable with cap insets
+AMOptionsTextFieldBackground		// UIColor, the textView color
+AMOptionsTextFieldFont					// UIFont, the textView font
+AMOptionsTextFieldFontColor			// UIColor, the textView font color
+AMOptionsTableBackground				// UIColor, the tableView color
+AMOptionsAccessoryPosition			// @(AMBubbleAccessoryPosition), defines wether the accessory should stay up or down
+AMOptionsButtonOffset						// @(float), the vertical offset of the send button
+AMOptionsBubbleTextColor				// UIColor, the main bubble's text color
+AMOptionsBubbleTextFont					// UIFont, the main bubble's text font
+AMOptionsUsernameFont						// UIFont, the username's text font
+```
+
 TODO
 --------------------
 * Add further customizations
-* Add styles
 * Landscape mode
 
 MIT License

@@ -1,15 +1,15 @@
 //
-//  AMBubbleAccessoryView.m
+//  AMBubbleFlatAccessoryView.m
 //  BubbleTableDemo
 //
-//  Created by Andrea Mazzini on 06/07/13.
+//  Created by Andrea Mazzini on 02/08/13.
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 //
 
-#import "AMBubbleAccessoryView.h"
+#import "AMBubbleFlatAccessoryView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface AMBubbleAccessoryView ()
+@interface AMBubbleFlatAccessoryView ()
 
 @property (nonatomic, weak)   NSDictionary* options;
 @property (nonatomic, strong) UILabel*		labelTimestamp;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation AMBubbleAccessoryView
+@implementation AMBubbleFlatAccessoryView
 
 - (id)init
 {
@@ -36,12 +36,10 @@
 		self.imageAvatar.layer.masksToBounds = YES;
 		self.imageAvatar.layer.borderColor = [UIColor lightGrayColor].CGColor;
 		self.imageAvatar.layer.borderWidth = 1.0;
-
-		[self.labelTimestamp setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
-
-		self.labelTimestamp.shadowColor = [UIColor whiteColor];
-		self.labelTimestamp.shadowOffset = CGSizeMake(0, 1.0);
 		
+		[self.labelTimestamp setTextColor:[UIColor colorWithRed:0.627 green:0.627 blue:0.627 alpha:1]];
+		[self.labelTimestamp setTextAlignment:ALIGN_CENTER];
+		[self.labelTimestamp setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }
@@ -75,20 +73,19 @@
 										  [self.options[AMOptionsAvatarSize] floatValue])
 	 ];
 	
-	[self.labelTimestamp setFrame:CGRectMake([self.options[AMOptionsAvatarSize] floatValue] - sizeTime.width,
-											 [self.options[AMOptionsAvatarSize] floatValue] - sizeTime.height,
-											 sizeTime.width,
+	[self.labelTimestamp setFrame:CGRectMake(0,
+											 [self.options[AMOptionsAvatarSize] floatValue] + 2,
+											 [self.options[AMOptionsAvatarSize] floatValue],
 											 sizeTime.height)
 	 ];
-
+	
 	[self setFrame:CGRectMake(0,
 							  0,
-							  MAX(self.labelTimestamp.frame.size.width, self.imageAvatar.frame.size.width),
-							  MAX(self.labelTimestamp.frame.size.height, self.imageAvatar.frame.size.height))
+							  [self.options[AMOptionsAvatarSize] floatValue],
+							  [self.options[AMOptionsAvatarSize] floatValue]  + sizeTime.height + 2)
 	 ];
 	
 }
-
 
 
 @end

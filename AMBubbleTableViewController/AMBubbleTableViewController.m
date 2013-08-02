@@ -48,6 +48,23 @@
 	return _options;
 }
 
+- (void)setTableStyle:(AMBubbleTableStyle)style
+{
+	switch (style) {
+		case AMBubbleTableStyleDefault:
+			[self.options addEntriesFromDictionary:[AMBubbleGlobals defaultStyleDefault]];
+			break;
+		case AMBubbleTableStyleSquare:
+			[self.options addEntriesFromDictionary:[AMBubbleGlobals defaultStyleSquare]];
+			break;
+		case AMBubbleTableStyleFlat:
+			[self.options addEntriesFromDictionary:[AMBubbleGlobals defaultStyleFlat]];
+			break;
+		default:
+			break;
+	}
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
@@ -82,16 +99,14 @@
 	[self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self.tableView setDataSource:self];
 	[self.tableView setDelegate:self];
-	[self.tableView setBackgroundColor:[UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f]];
+	[self.tableView setBackgroundColor:self.options[AMOptionsTableBackground]];
 	[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[self.view addSubview:self.tableView];
 	
     // Input background
     CGRect inputFrame = CGRectMake(0.0f, self.view.frame.size.height - kInputHeight, self.view.frame.size.width, kInputHeight);
 	
-	self.imageInput = [[UIImageView alloc] initWithImage:
-					   [[UIImage imageNamed:@"imageBar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)]
-					   ];
+	self.imageInput = [[UIImageView alloc] initWithImage:self.options[AMOptionsImageBar]];
 	[self.imageInput setFrame:inputFrame];
 	[self.imageInput setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin)];
 	[self.imageInput setUserInteractionEnabled:YES];
@@ -108,9 +123,9 @@
     [self.textView setScrollEnabled:NO];
     [self.textView setScrollsToTop:NO];
     [self.textView setUserInteractionEnabled:YES];
-    [self.textView setFont:[UIFont systemFontOfSize:15]];
-    [self.textView setTextColor:[UIColor blackColor]];
-    [self.textView setBackgroundColor:[UIColor whiteColor]];
+    [self.textView setFont:self.options[AMOptionsTextFieldFont]];
+    [self.textView setTextColor:self.options[AMOptionsTextFieldFontColor]];
+    [self.textView setBackgroundColor:self.options[AMOptionsTextFieldBackground]];
     [self.textView setKeyboardAppearance:UIKeyboardAppearanceDefault];
     [self.textView setKeyboardType:UIKeyboardTypeDefault];
     [self.textView setReturnKeyType:UIReturnKeyDefault];
@@ -123,7 +138,7 @@
 																		0.0f,
 																		self.textView.frame.size.width + 2.0f,
 																		self.imageInput.frame.size.height)];
-    [self.imageInputBack setImage:[[UIImage imageNamed:@"imageInput"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)]];
+    [self.imageInputBack setImage:self.options[AMOptionsImageInput]];
     [self.imageInputBack setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
     [self.imageInputBack setBackgroundColor:[UIColor clearColor]];
 	[self.imageInputBack setUserInteractionEnabled:NO];
@@ -133,9 +148,8 @@
     self.buttonSend = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.buttonSend setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin)];
     
-    UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f);
-    UIImage *sendBack = [[UIImage imageNamed:@"buttonSend"] resizableImageWithCapInsets:insets];
-    UIImage *sendBackHighLighted = [[UIImage imageNamed:@"buttonSendHighlighted"] resizableImageWithCapInsets:insets];
+    UIImage *sendBack = self.options[AMOptionsImageButton];
+    UIImage *sendBackHighLighted = self.options[AMOptionsImageButtonHighlight];
     [self.buttonSend setBackgroundImage:sendBack forState:UIControlStateNormal];
     [self.buttonSend setBackgroundImage:sendBack forState:UIControlStateDisabled];
     [self.buttonSend setBackgroundImage:sendBackHighLighted forState:UIControlStateHighlighted];
@@ -156,7 +170,7 @@
     [self.buttonSend setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateDisabled];
     
     [self.buttonSend setEnabled:NO];
-    [self.buttonSend setFrame:CGRectMake(self.imageInput.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f)];
+    [self.buttonSend setFrame:CGRectMake(self.imageInput.frame.size.width - 65.0f, [self.options[AMOptionsButtonOffset] floatValue], 59.0f, 26.0f)];
     [self.buttonSend addTarget:self	action:@selector(sendPressed:) forControlEvents:UIControlEventTouchUpInside];
 	
     [self.imageInput addSubview:self.buttonSend];
@@ -189,9 +203,8 @@
 
 	
 	if (cell == nil) {
-		cell = [[AMBubbleTableCell alloc] initWithStyle:[self.options[AMOptionsTableStyle] intValue]
-												options:self.options
-										reuseIdentifier:cellID];
+		cell = [[AMBubbleTableCell alloc] initWithOptions:self.options
+										  reuseIdentifier:cellID];
 	}
 		
 	NSString* stringDate;
@@ -234,14 +247,14 @@
 	}
     
     // Set MessageCell height.
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:15]
+    CGSize size = [text sizeWithFont:self.options[AMOptionsBubbleTextFont]
 				   constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
 					   lineBreakMode:NSLineBreakByWordWrapping];
 	
 	CGSize usernameSize = CGSizeZero;
 	
 	if (![username isEqualToString:@""] && type == AMBubbleCellReceived) {
-		usernameSize = [username sizeWithFont:[UIFont boldSystemFontOfSize:13]
+		usernameSize = [username sizeWithFont:self.options[AMOptionsTimestampFont]
 							constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
 								lineBreakMode:NSLineBreakByWordWrapping];
 	}
