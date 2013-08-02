@@ -39,7 +39,7 @@
 				 @{@"text": @"you are lucky. Your friend is going to meet Bel-Shamharoth. You will only die.",
 				 @"date": [NSDate date], @"type": @(AMBubbleCellSent)},
 				 @{@"text": @"Guess the quotes!",
-				 @"date": [NSDate date], @"type": @(AMBubbleCellSent)}
+				 @"date": [NSDate date], @"type": @(AMBubbleCellSent)},
 				 ]
 				 ];
 	

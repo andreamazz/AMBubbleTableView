@@ -106,15 +106,22 @@
 		CGSize usernameSize = CGSizeZero;
 		
 		if (![params[@"username"] isEqualToString:@""]) {
+			[self.labelUsername setFont:[UIFont boldSystemFontOfSize:13]];
 			usernameSize = [params[@"username"] sizeWithFont:[UIFont boldSystemFontOfSize:13]
-										   constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
+										   constrainedToSize:CGSizeMake(kMessageTextWidth, self.labelUsername.font.lineHeight)
 											   lineBreakMode:NSLineBreakByWordWrapping];
+			[self.labelUsername setNumberOfLines:1];
+			[self.labelUsername setFrame:CGRectMake(22.0f, kMessageFontSize-9.0f, usernameSize.width+5.0f, usernameSize.height)];
+			[self.labelUsername setBackgroundColor:[UIColor clearColor]];
+			if ([params[@"color"] isKindOfClass:[UIColor class]]) {
+				[self.labelUsername setTextColor:params[@"color"]];
+			}
+			[self.labelUsername setText:params[@"username"]];
 		}
 		
-		// TODO: account for username longer than the text
 		CGRect rect = CGRectMake(0.0f + self.bubbleAccessory.frame.size.width,
 								 kMessageFontSize - 13.0f,
-								 sizeText.width + 34.0f,
+								 MAX(sizeText.width, usernameSize.width) + 34.0f, // Accounts for usernames longer than text
 								 sizeText.height + 12.0f + usernameSize.height);
 		
 		if (rect.size.height > self.bubbleAccessory.frame.size.height) {
@@ -129,17 +136,6 @@
 					   background:rect
 						textFrame:CGRectMake(22.0f, 4.0 + usernameSize.height, sizeText.width + 5.0f, sizeText.height)
 						  andText:params[@"text"]];
-		
-		if (![params[@"username"] isEqualToString:@""]) {
-			self.labelUsername.frame = CGRectMake(22.0f, kMessageFontSize-9.0f, usernameSize.width+5.0f, usernameSize.height);
-			[self.labelUsername setFont:[UIFont boldSystemFontOfSize:13]];
-			[self.labelUsername setTextColor:[UIColor redColor]];
-			[self.labelUsername setBackgroundColor:[UIColor clearColor]];
-			if ([params[@"color"] isKindOfClass:[UIColor class]]) {
-				[self.labelUsername setTextColor:params[@"color"]];
-			}
-			self.labelUsername.text = params[@"username"];
-		}
 	}
 	
 	if (type == AMBubbleCellTimestamp) {

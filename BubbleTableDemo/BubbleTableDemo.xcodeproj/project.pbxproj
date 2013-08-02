@@ -97,8 +97,8 @@
 		655393271780646500C09726 /* messageBubbleTyping@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleTyping@2x.png"; sourceTree = "<group>"; };
 		655393421780648D00C09726 /* AMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMViewController.h; sourceTree = "<group>"; };
 		655393431780648D00C09726 /* AMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMViewController.m; sourceTree = "<group>"; };
-		658779E3179FDCC10086BD1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		658779E5179FDCC40086BD1F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		658779E3179FDCC10086BD1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		658779E5179FDCC40086BD1F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		65C0489A17881C270057C421 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		65C0489B17881C270057C421 /* avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar@2x.png"; sourceTree = "<group>"; };
 		65C0489E178883A60057C421 /* AMBubbleAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBubbleAccessoryView.h; sourceTree = "<group>"; };
@@ -123,8 +123,6 @@
 		655392A417802FF600C09726 = {
 			isa = PBXGroup;
 			children = (
-				658779E5179FDCC40086BD1F /* Icon@2x.png */,
-				658779E3179FDCC10086BD1F /* Icon.png */,
 				655392B617802FF600C09726 /* BubbleTableDemo */,
 				655392AF17802FF600C09726 /* Frameworks */,
 				655392AE17802FF600C09726 /* Products */,
@@ -167,6 +165,8 @@
 		655392B717802FF600C09726 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				658779E5179FDCC40086BD1F /* Icon@2x.png */,
+				658779E3179FDCC10086BD1F /* Icon.png */,
 				655392B817802FF600C09726 /* BubbleTableDemo-Info.plist */,
 				655392B917802FF600C09726 /* InfoPlist.strings */,
 				655392BC17802FF600C09726 /* main.m */,
