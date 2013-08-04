@@ -26,7 +26,7 @@ NSString *const AMOptionsImageButtonHighlight = @"AMOptionsImageButtonHighlight"
 NSString *const AMOptionsTextFieldBackground = @"AMOptionsTextFieldBackground";
 NSString *const AMOptionsTextFieldFont = @"AMOptionsTextFieldFont";
 NSString *const AMOptionsTextFieldFontColor = @"AMOptionsTextFieldFontColor";
-NSString *const AMOptionsTableBackground = @"AMOptionsTableBackground";
+NSString *const AMOptionsBubbleTableBackground = @"AMOptionsBubbleTableBackground";
 NSString *const AMOptionsAccessoryPosition = @"AMOptionsAccessoryPosition";
 NSString *const AMOptionsButtonOffset = @"AMOptionsButtonOffset";
 NSString *const AMOptionsBubbleTextColor = @"AMOptionsBubbleTextColor";
@@ -66,7 +66,7 @@ NSString *const AMOptionsUsernameFont = @"AMOptionsUsernameFont";
 	AMOptionsTextFieldBackground: [UIColor whiteColor],
 	AMOptionsTextFieldFont: [UIFont systemFontOfSize:15],
 	AMOptionsTextFieldFontColor: [UIColor blackColor],
-	AMOptionsTableBackground: [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f],
+	AMOptionsBubbleTableBackground: [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f],
 	AMOptionsAccessoryPosition: @(AMBubbleAccessoryDown),
 	AMOptionsButtonOffset: @8,
 	AMOptionsBubbleTextColor: [UIColor blackColor],
@@ -87,7 +87,7 @@ NSString *const AMOptionsUsernameFont = @"AMOptionsUsernameFont";
 	AMOptionsTextFieldBackground: [UIColor whiteColor],
 	AMOptionsTextFieldFont: [UIFont systemFontOfSize:15],
 	AMOptionsTextFieldFontColor: [UIColor blackColor],
-	AMOptionsTableBackground: [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f],
+	AMOptionsBubbleTableBackground: [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f],
 	AMOptionsAccessoryPosition: @(AMBubbleAccessoryDown),
 	AMOptionsButtonOffset: @8,
 	AMOptionsBubbleTextColor: [UIColor blackColor],
@@ -109,7 +109,7 @@ NSString *const AMOptionsUsernameFont = @"AMOptionsUsernameFont";
 	AMOptionsTextFieldBackground: [UIColor colorWithRed:0.827 green:0.827 blue:0.827 alpha:1],
 	AMOptionsTextFieldFont: [UIFont systemFontOfSize:15],
 	AMOptionsTextFieldFontColor: [UIColor darkGrayColor],
-	AMOptionsTableBackground: [UIColor colorWithRed:0.913f green:0.913f blue:0.913f alpha:1.0f],
+	AMOptionsBubbleTableBackground: [UIColor colorWithRed:0.913f green:0.913f blue:0.913f alpha:1.0f],
 	AMOptionsAccessoryPosition: @(AMBubbleAccessoryUp),
 	AMOptionsAccessoryClass: @"AMBubbleFlatAccessoryView",
 	AMOptionsAccessorySize: @60,

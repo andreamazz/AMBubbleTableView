@@ -101,7 +101,7 @@ AMOptionsImageButtonHighlight   // UIImage, the highlighted button image, resiza
 AMOptionsTextFieldBackground    // UIColor, the textView color
 AMOptionsTextFieldFont          // UIFont, the textView font
 AMOptionsTextFieldFontColor     // UIColor, the textView font color
-AMOptionsTableBackground        // UIColor, the tableView color
+AMOptionsBubbleTableBackground  // UIColor, the tableView color
 AMOptionsAccessoryPosition      // @(AMBubbleAccessoryPosition), defines wether the accessory should stay up or down
 AMOptionsButtonOffset           // @(float), the vertical offset of the send button
 AMOptionsBubbleTextColor        // UIColor, the main bubble's text color

@@ -99,7 +99,7 @@
 	[self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self.tableView setDataSource:self];
 	[self.tableView setDelegate:self];
-	[self.tableView setBackgroundColor:self.options[AMOptionsTableBackground]];
+	[self.tableView setBackgroundColor:self.options[AMOptionsBubbleTableBackground]];
 	[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[self.view addSubview:self.tableView];
 	

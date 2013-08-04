@@ -107,7 +107,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsTextFieldFont;
 FOUNDATION_EXPORT NSString *const AMOptionsTextFieldFontColor;
 
 // Table background
-FOUNDATION_EXPORT NSString *const AMOptionsTableBackground;
+FOUNDATION_EXPORT NSString *const AMOptionsBubbleTableBackground;
 
 // Accessory position (enum AMBubbleAccessoryPosition)
 FOUNDATION_EXPORT NSString *const AMOptionsAccessoryPosition;
