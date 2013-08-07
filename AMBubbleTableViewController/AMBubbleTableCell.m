@@ -68,7 +68,7 @@
 	if (type == AMBubbleCellSent) {
 
 		[self.bubbleAccessory setFrame:CGRectMake(width - self.bubbleAccessory.frame.size.width - 2,
-												  0,
+												  2,
 												  self.bubbleAccessory.frame.size.width,
 												  self.bubbleAccessory.frame.size.height)];
 		
@@ -104,7 +104,7 @@
 	if (type == AMBubbleCellReceived) {
 		
 		[self.bubbleAccessory setFrame:CGRectMake(2,
-												  0,
+												  2,
 												  self.bubbleAccessory.frame.size.width,
 												  self.bubbleAccessory.frame.size.height)];
 		CGSize usernameSize = CGSizeZero;

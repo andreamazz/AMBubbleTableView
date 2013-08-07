@@ -295,10 +295,13 @@
                                                            self.imageInput.frame.size.width,
                                                            self.imageInput.frame.size.height);
                          
+						 CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? self.view.frame.size.width : self.view.frame.size.height;
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
-                                                                self.view.frame.size.height - self.imageInput.frame.origin.y - kInputHeight,
+                                                                viewHeight - self.imageInput.frame.origin.y - kInputHeight,
                                                                 0.0f);
+
+						 
 						 
                          self.tableView.contentInset = insets;
                          self.tableView.scrollIndicatorInsets = insets;
@@ -320,9 +323,10 @@
     self.textView.scrollEnabled = (numLines >= 4);
 	
 	// Adjust table view's insets
+	CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? self.view.frame.size.width : self.view.frame.size.height;
 	UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
 										   0.0f,
-										   self.view.frame.size.height - self.imageInput.frame.origin.y - kInputHeight,
+										   viewHeight - self.imageInput.frame.origin.y - kInputHeight,
 										   0.0f);
 
 	self.tableView.contentInset = insets;
@@ -416,7 +420,6 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[self.tableView setNeedsDisplay];
 	[self.tableView reloadData];
 }
 

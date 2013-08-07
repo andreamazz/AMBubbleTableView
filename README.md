@@ -112,7 +112,6 @@ AMOptionsUsernameFont           // UIFont, the username's text font
 TODO
 --------------------
 * Add further customizations
-* Landscape mode
 
 MIT License
 --------------------

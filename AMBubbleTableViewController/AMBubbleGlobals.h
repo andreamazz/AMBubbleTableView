@@ -23,7 +23,7 @@ typedef enum {
 	AMBubbleAccessoryDown
 } AMBubbleAccessoryPosition;
 
-#define kMessageTextWidth	180.0f
+#define kMessageTextWidth	(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? 380.0f : 180.0f
 
 #ifdef __IPHONE_6_0
 # define ALIGN_CENTER NSTextAlignmentCenter

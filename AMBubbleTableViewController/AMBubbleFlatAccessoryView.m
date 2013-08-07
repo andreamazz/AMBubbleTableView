@@ -32,10 +32,8 @@
 		[self addSubview:self.imageAvatar];
 		[self addSubview:self.labelTimestamp];
 		
-		self.imageAvatar.layer.cornerRadius = 5.0;
+		self.imageAvatar.layer.cornerRadius = 2.0;
 		self.imageAvatar.layer.masksToBounds = YES;
-		self.imageAvatar.layer.borderColor = [UIColor lightGrayColor].CGColor;
-		self.imageAvatar.layer.borderWidth = 1.0;
 		
 		[self.labelTimestamp setTextColor:[UIColor colorWithRed:0.627 green:0.627 blue:0.627 alpha:1]];
 		[self.labelTimestamp setTextAlignment:ALIGN_CENTER];
@@ -74,7 +72,7 @@
 	 ];
 	
 	[self.labelTimestamp setFrame:CGRectMake(0,
-											 [self.options[AMOptionsAvatarSize] floatValue] + 2,
+											 [self.options[AMOptionsAvatarSize] floatValue],
 											 [self.options[AMOptionsAvatarSize] floatValue],
 											 sizeTime.height)
 	 ];
