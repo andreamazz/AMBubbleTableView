@@ -287,15 +287,21 @@
                           delay:0.0f
                         options:curve << 16 // Options conversion, TODO: fix it
                      animations:^{
+						 CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? MIN(self.view.frame.size.width,self.view.frame.size.height) : MAX(self.view.frame.size.width,self.view.frame.size.height);
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
+						 
+						 // This check prevents an issue when the view is inside a UITabBarController
+						 if (keyboardY > viewHeight) {
+							 keyboardY = viewHeight;
+						 }
+						 
 						 CGFloat inputViewFrameY = keyboardY - self.imageInput.frame.size.height;
                          
                          self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,
                                                            inputViewFrameY,
                                                            self.imageInput.frame.size.width,
                                                            self.imageInput.frame.size.height);
-                         
-						 CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? self.view.frame.size.width : self.view.frame.size.height;
+						 
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
                                                                 viewHeight - self.imageInput.frame.origin.y - kInputHeight,
