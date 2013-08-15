@@ -133,4 +133,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsUsernameFont;
 + (NSDictionary*)defaultStyleSquare;
 + (NSDictionary*)defaultStyleFlat;
 
+// Utils
++ (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
+
 @end

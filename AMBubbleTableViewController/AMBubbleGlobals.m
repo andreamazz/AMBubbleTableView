@@ -120,4 +120,22 @@ NSString *const AMOptionsUsernameFont = @"AMOptionsUsernameFont";
 	};
 }
 
++ (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve
+{
+	switch (curve) {
+		case UIViewAnimationCurveEaseIn:
+			return UIViewAnimationOptionCurveEaseIn;
+			break;
+		case UIViewAnimationCurveEaseInOut:
+			return UIViewAnimationOptionCurveEaseInOut;
+			break;
+		case UIViewAnimationCurveEaseOut:
+			return UIViewAnimationOptionCurveEaseOut;
+			break;
+		case UIViewAnimationCurveLinear:
+			return UIViewAnimationOptionCurveLinear;
+			break;
+	}
+}
+
 @end

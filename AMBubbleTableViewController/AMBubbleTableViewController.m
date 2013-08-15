@@ -240,7 +240,11 @@
 {
 	AMBubbleCellType type = [self.dataSource cellTypeForRowAtIndexPath:indexPath];
 	NSString* text = [self.dataSource textForRowAtIndexPath:indexPath];
-	NSString* username = [self.dataSource usernameForRowAtIndexPath:indexPath];
+	NSString* username = @"";
+	
+	if ([self.dataSource respondsToSelector:@selector(usernameForRowAtIndexPath:)]) {
+		username = [self.dataSource usernameForRowAtIndexPath:indexPath];
+	}
 	
 	if (type == AMBubbleCellTimestamp) {
 		return [self.options[AMOptionsTimestampHeight] floatValue];
@@ -282,19 +286,32 @@
 	CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	UIViewAnimationCurve curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
 	double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-
+	
+	CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? MIN(self.view.frame.size.width,self.view.frame.size.height) : MAX(self.view.frame.size.width,self.view.frame.size.height));
+	CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
+	CGFloat diff = keyboardY - viewHeight;
+	
+	// This check prevents an issue when the view is inside a UITabBarController
+	if (diff > 0) {
+		double fraction = diff/keyboardY;
+		duration *= (1-fraction);
+		keyboardY = viewHeight;
+	}
+	
+	// Thanks to Raja Baz (@raja-baz) for the delay's animation fix.	
+	CGFloat delay = 0.0f;
+	CGRect beginRect = [[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	diff = beginRect.origin.y - viewHeight;
+	if (diff > 0) {
+		double fraction = diff/beginRect.origin.y;
+		delay = duration * fraction;
+		duration -= delay;
+	}
+	
     [UIView animateWithDuration:duration
-                          delay:0.0f
-                        options:curve << 16 // Options conversion, TODO: fix it
+                          delay:delay
+                        options:[AMBubbleGlobals animationOptionsForCurve:curve]
                      animations:^{
-						 CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? MIN(self.view.frame.size.width,self.view.frame.size.height) : MAX(self.view.frame.size.width,self.view.frame.size.height);
-                         CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
-						 
-						 // This check prevents an issue when the view is inside a UITabBarController
-						 if (keyboardY > viewHeight) {
-							 keyboardY = viewHeight;
-						 }
-						 
 						 CGFloat inputViewFrameY = keyboardY - self.imageInput.frame.size.height;
                          
                          self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,

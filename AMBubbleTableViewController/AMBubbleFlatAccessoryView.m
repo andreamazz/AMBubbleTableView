@@ -63,8 +63,6 @@
 								   lineBreakMode:NSLineBreakByWordWrapping];
 	}
 	
-	// TODO: reduce to 0 the size when no avatar or timestamp is included
-	
 	[self.imageAvatar setFrame:CGRectMake(0,
 										  0,
 										  [self.options[AMOptionsAvatarSize] floatValue],

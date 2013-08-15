@@ -10,9 +10,6 @@
 #import "AMBubbleAccessoryView.h"
 #import <QuartzCore/QuartzCore.h>
 
-// TODO: parametrize
-#define kMessageFontSize 15
-
 @interface AMBubbleTableCell ()
 
 @property (nonatomic, weak)   NSDictionary* options;
@@ -71,9 +68,9 @@
 												  2,
 												  self.bubbleAccessory.frame.size.width,
 												  self.bubbleAccessory.frame.size.height)];
-		
+
 		CGRect rect = CGRectMake(width - sizeText.width - 34.0f - self.bubbleAccessory.frame.size.width,
-								 kMessageFontSize - 13.0f,
+								 textFont.lineHeight - 13.0f,
 								 sizeText.width + 34.0f,
 								 sizeText.height + 12.0f);
 		
@@ -110,12 +107,13 @@
 		CGSize usernameSize = CGSizeZero;
 		
 		if (![params[@"username"] isEqualToString:@""]) {
-			[self.labelUsername setFont:self.options[AMOptionsUsernameFont]];
-			usernameSize = [params[@"username"] sizeWithFont:self.options[AMOptionsUsernameFont]
+			UIFont* fontUsername = self.options[AMOptionsUsernameFont];
+			[self.labelUsername setFont:fontUsername];
+			usernameSize = [params[@"username"] sizeWithFont:fontUsername
 										   constrainedToSize:CGSizeMake(kMessageTextWidth, self.labelUsername.font.lineHeight)
 											   lineBreakMode:NSLineBreakByWordWrapping];
 			[self.labelUsername setNumberOfLines:1];
-			[self.labelUsername setFrame:CGRectMake(22.0f, kMessageFontSize-9.0f, usernameSize.width+5.0f, usernameSize.height)];
+			[self.labelUsername setFrame:CGRectMake(22.0f, fontUsername.lineHeight - 9.0f, usernameSize.width+5.0f, usernameSize.height)];
 			[self.labelUsername setBackgroundColor:[UIColor clearColor]];
 			if ([params[@"color"] isKindOfClass:[UIColor class]]) {
 				[self.labelUsername setTextColor:params[@"color"]];
@@ -124,7 +122,7 @@
 		}
 		
 		CGRect rect = CGRectMake(0.0f + self.bubbleAccessory.frame.size.width,
-								 kMessageFontSize - 13.0f,
+								 textFont.lineHeight - 13.0f,
 								 MAX(sizeText.width, usernameSize.width) + 34.0f, // Accounts for usernames longer than text
 								 sizeText.height + 12.0f + usernameSize.height);
 		
