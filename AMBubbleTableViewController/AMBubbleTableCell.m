@@ -26,6 +26,8 @@
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
+		NSLog(@"%@", NSStringFromCGRect(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)));
+
 		self.options = options;
 		self.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -42,7 +44,6 @@
     }
     return self;
 }
-
 
 - (void)setupCellWithType:(AMBubbleCellType)type withWidth:(float)width andParams:(NSDictionary*)params
 {
@@ -73,7 +74,7 @@
 								 textFont.lineHeight - 13.0f,
 								 sizeText.width + 34.0f,
 								 sizeText.height + 12.0f);
-		
+
 		if (rect.size.height > self.bubbleAccessory.frame.size.height) {
 			if ([self.options[AMOptionsAccessoryPosition] intValue] == AMBubbleAccessoryDown) {
 				CGRect frame = self.bubbleAccessory.frame;
@@ -87,7 +88,7 @@
 				rect.origin.y = 0;
 			}
 		}
-		
+
 		[self setupBubbleWithType:type
 					   background:rect
 						textFrame:CGRectMake(12.0f,
@@ -179,5 +180,7 @@
 	[self.labelText setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
 	[self.labelText setText:text];
 }
+
+
 
 @end

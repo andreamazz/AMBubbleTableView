@@ -205,6 +205,12 @@
 	if (cell == nil) {
 		cell = [[AMBubbleTableCell alloc] initWithOptions:self.options
 										  reuseIdentifier:cellID];
+		
+		// iPad cells are set by default to 320 pixels, this fixes the quirk
+		cell.contentView.frame = CGRectMake(cell.contentView.frame.origin.x,
+											cell.contentView.frame.origin.y,
+											self.tableView.frame.size.width,
+											cell.contentView.frame.size.height);
 	}
 		
 	NSString* stringDate;
