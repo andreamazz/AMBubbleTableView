@@ -49,7 +49,7 @@ typedef enum {
 
 @protocol AMBubbleAccessory <NSObject>
 @required
-- (id)setOptions:(NSDictionary*)options;
+- (void)setOptions:(NSDictionary*)options;
 - (void)setupView:(NSDictionary*)params;
 @end
 
