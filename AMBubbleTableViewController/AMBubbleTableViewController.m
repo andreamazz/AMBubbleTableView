@@ -17,7 +17,6 @@
 @interface AMBubbleTableViewController () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary*	options;
-@property (nonatomic, strong) UITableView*	tableView;
 @property (nonatomic, strong) UIImageView*	imageInput;
 @property (nonatomic, strong) UITextView*	textView;
 @property (nonatomic, strong) UIImageView*	imageInputBack;
