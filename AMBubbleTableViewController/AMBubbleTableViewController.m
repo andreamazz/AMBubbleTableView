@@ -152,7 +152,8 @@
     [self.buttonSend setBackgroundImage:sendBack forState:UIControlStateNormal];
     [self.buttonSend setBackgroundImage:sendBack forState:UIControlStateDisabled];
     [self.buttonSend setBackgroundImage:sendBackHighLighted forState:UIControlStateHighlighted];
-    
+	[self.buttonSend.titleLabel setFont:self.options[AMOptionsButtonFont]];
+
     NSString *title = NSLocalizedString(@"Send",);
     [self.buttonSend setTitle:title forState:UIControlStateNormal];
     [self.buttonSend setTitle:title forState:UIControlStateHighlighted];

@@ -107,6 +107,7 @@ AMOptionsButtonOffset           // @(float), the vertical offset of the send but
 AMOptionsBubbleTextColor        // UIColor, the main bubble's text color
 AMOptionsBubbleTextFont         // UIFont, the main bubble's text font
 AMOptionsUsernameFont           // UIFont, the username's text font
+AMOptionsButtonFont             // UIFont, the button's text font
 ```
 
 TODO

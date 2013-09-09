@@ -124,6 +124,9 @@ FOUNDATION_EXPORT NSString *const AMOptionsBubbleTextFont;
 // Username text font
 FOUNDATION_EXPORT NSString *const AMOptionsUsernameFont;
 
+// Button Font
+FOUNDATION_EXPORT NSString *const AMOptionsButtonFont;
+
 @interface AMBubbleGlobals : NSObject
 
 + (NSDictionary*)defaultOptions;

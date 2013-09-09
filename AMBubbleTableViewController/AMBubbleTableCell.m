@@ -26,8 +26,6 @@
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-		NSLog(@"%@", NSStringFromCGRect(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)));
-
 		self.options = options;
 		self.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;

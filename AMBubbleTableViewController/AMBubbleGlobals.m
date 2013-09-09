@@ -32,6 +32,7 @@ NSString *const AMOptionsButtonOffset = @"AMOptionsButtonOffset";
 NSString *const AMOptionsBubbleTextColor = @"AMOptionsBubbleTextColor";
 NSString *const AMOptionsBubbleTextFont = @"AMOptionsBubbleTextFont";
 NSString *const AMOptionsUsernameFont = @"AMOptionsUsernameFont";
+NSString *const AMOptionsButtonFont = @"AMOptionsButtonFont";
 
 @implementation AMBubbleGlobals
 
