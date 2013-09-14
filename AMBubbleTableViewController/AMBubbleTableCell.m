@@ -47,6 +47,10 @@
 {
 	UIFont* textFont = self.options[AMOptionsBubbleTextFont];
 		
+	CGRect content = self.contentView.frame;
+	content.size.width = width;
+	self.contentView.frame = content;
+	
 	// Configure the cell to show the message in a bubble. Layout message cell & its subviews.
 	CGSize sizeText = [params[@"text"] sizeWithFont:textFont
 								  constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
@@ -67,6 +71,7 @@
 												  2,
 												  self.bubbleAccessory.frame.size.width,
 												  self.bubbleAccessory.frame.size.height)];
+
 
 		CGRect rect = CGRectMake(width - sizeText.width - 34.0f - self.bubbleAccessory.frame.size.width,
 								 textFont.lineHeight - 13.0f,
@@ -94,7 +99,6 @@
 											 sizeText.width + 5.0f,
 											 sizeText.height)
 						  andText:params[@"text"]];
-		
 	}
 	
 	if (type == AMBubbleCellReceived) {
