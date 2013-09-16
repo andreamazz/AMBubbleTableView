@@ -39,6 +39,8 @@ typedef enum {
 
 @protocol AMBubbleTableDelegate <NSObject>
 - (void)didSendText:(NSString*)text;
+@optional
+- (void)swipedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame andDirection:(UISwipeGestureRecognizerDirection)direction;
 @end
 
 @protocol AMBubbleAccessory <NSObject>

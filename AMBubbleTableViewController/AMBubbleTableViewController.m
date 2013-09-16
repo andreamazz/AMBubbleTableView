@@ -211,8 +211,15 @@
 											cell.contentView.frame.origin.y,
 											self.tableView.frame.size.width,
 											cell.contentView.frame.size.height);
-	}
 		
+		UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
+		swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft|UISwipeGestureRecognizerDirectionRight;
+		[cell addGestureRecognizer:swipeGesture];
+	}
+	
+	// Used by the gesture recognizer
+	cell.tag = indexPath.row;
+	
 	NSString* stringDate;
 	if (type == AMBubbleCellTimestamp) {
 		[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];	// Jan 1, 2000
@@ -240,6 +247,13 @@
 	}
 	
 	return cell;
+}
+
+- (void)handleSwipeGesture:(UISwipeGestureRecognizer *)sender
+{
+	if ([self.delegate respondsToSelector:@selector(swipedCellAtIndexPath:withFrame:andDirection:)]) {
+		[self.delegate swipedCellAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:sender.view.tag] withFrame:sender.view.frame andDirection:sender.direction];
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

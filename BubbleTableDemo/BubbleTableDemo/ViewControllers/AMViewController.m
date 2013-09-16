@@ -80,6 +80,11 @@
 	[super viewDidLoad];
 }
 
+- (void)swipedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame andDirection:(UISwipeGestureRecognizerDirection)direction
+{
+
+}
+
 #pragma mark - AMBubbleTableDataSource
 
 - (NSInteger)numberOfRows

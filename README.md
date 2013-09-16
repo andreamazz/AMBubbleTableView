@@ -50,6 +50,7 @@ Implement the delegate to receive the user's text:
 
 ```objc
 - (void)didSendText:(NSString*)text;
+- (void)swipedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame andDirection:(UISwipeGestureRecognizerDirection)direction;
 ```
 
 Main styles
