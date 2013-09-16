@@ -25,12 +25,6 @@ typedef enum {
 
 #define kMessageTextWidth	(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? 380.0f : 180.0f
 
-#ifdef __IPHONE_6_0
-# define ALIGN_CENTER NSTextAlignmentCenter
-#else
-# define ALIGN_CENTER UITextAlignmentCenter
-#endif
-
 @protocol AMBubbleTableDataSource <NSObject>
 @required
 - (NSInteger)numberOfRows;

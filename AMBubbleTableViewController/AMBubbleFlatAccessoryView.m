@@ -36,7 +36,7 @@
 		self.imageAvatar.layer.masksToBounds = YES;
 		
 		[self.labelTimestamp setTextColor:[UIColor colorWithRed:0.627 green:0.627 blue:0.627 alpha:1]];
-		[self.labelTimestamp setTextAlignment:ALIGN_CENTER];
+		[self.labelTimestamp setTextAlignment:NSTextAlignmentCenter];
 		[self.labelTimestamp setBackgroundColor:[UIColor clearColor]];
     }
     return self;
