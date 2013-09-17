@@ -387,7 +387,7 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
 	// TODO: trim white spaces
-	[self.buttonSend setEnabled:(textView.text.length > 0)];
+	[self.buttonSend setEnabled:([textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)];
 
 	CGFloat maxHeight = self.textView.font.lineHeight * 5;
 	CGFloat textViewContentHeight = textView.contentSize.height;
