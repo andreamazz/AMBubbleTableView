@@ -123,7 +123,11 @@
 	 @"type": @(AMBubbleCellSent)
 	 }];
 	
-	[super reloadTableScrollingToBottom:YES];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.data.count - 1) inSection:0];
+    	[self.tableView beginUpdates];
+    	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+    	[self.tableView endUpdates];
+	// [super reloadTableScrollingToBottom:YES];
 }
 
 - (NSString*)usernameForRowAtIndexPath:(NSIndexPath *)indexPath
