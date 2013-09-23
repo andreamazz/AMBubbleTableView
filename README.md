@@ -51,6 +51,7 @@ Implement the delegate to receive the user's text:
 ```objc
 - (void)didSendText:(NSString*)text;
 - (void)swipedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame andDirection:(UISwipeGestureRecognizerDirection)direction;
+- (void)longPressedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame;
 ```
 
 Main styles
@@ -109,6 +110,8 @@ AMOptionsBubbleTextColor        // UIColor, the main bubble's text color
 AMOptionsBubbleTextFont         // UIFont, the main bubble's text font
 AMOptionsUsernameFont           // UIFont, the username's text font
 AMOptionsButtonFont             // UIFont, the button's text font
+AMOptionsBubbleSwipeEnabled     // @(BOOL), enables the swipe detection on a cell
+AMOptionsBubblePressEnabled     // @(BOOL), enables the long press detection on a cell
 ```
 
 TODO

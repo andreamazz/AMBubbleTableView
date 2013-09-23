@@ -211,10 +211,16 @@
 											cell.contentView.frame.origin.y,
 											self.tableView.frame.size.width,
 											cell.contentView.frame.size.height);
-		
-		UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
-		swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft|UISwipeGestureRecognizerDirectionRight;
-		[cell addGestureRecognizer:swipeGesture];
+
+		if ([self.options[AMOptionsBubbleSwipeEnabled] boolValue]) {
+			UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
+			swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft|UISwipeGestureRecognizerDirectionRight;
+			[cell addGestureRecognizer:swipeGesture];
+		}
+		if ([self.options[AMOptionsBubblePressEnabled] boolValue]) {
+			UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+			[cell addGestureRecognizer:longPressGesture];
+		}
 	}
 	
 	// Used by the gesture recognizer
@@ -253,6 +259,13 @@
 {
 	if ([self.delegate respondsToSelector:@selector(swipedCellAtIndexPath:withFrame:andDirection:)]) {
 		[self.delegate swipedCellAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:sender.view.tag] withFrame:sender.view.frame andDirection:sender.direction];
+	}
+}
+
+- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender
+{
+	if ([self.delegate respondsToSelector:@selector(longPressedCellAtIndexPath:withFrame:)]) {
+		[self.delegate longPressedCellAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:sender.view.tag] withFrame:sender.view.frame];
 	}
 }
 

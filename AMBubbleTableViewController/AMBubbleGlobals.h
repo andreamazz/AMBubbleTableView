@@ -41,6 +41,7 @@ typedef enum {
 - (void)didSendText:(NSString*)text;
 @optional
 - (void)swipedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame andDirection:(UISwipeGestureRecognizerDirection)direction;
+- (void)longPressedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame;
 @end
 
 @protocol AMBubbleAccessory <NSObject>
@@ -122,6 +123,12 @@ FOUNDATION_EXPORT NSString *const AMOptionsUsernameFont;
 
 // Button Font
 FOUNDATION_EXPORT NSString *const AMOptionsButtonFont;
+
+// Enable Swipe gesture
+FOUNDATION_EXPORT NSString *const AMOptionsBubbleSwipeEnabled;
+
+// Enable Long press gesture
+FOUNDATION_EXPORT NSString *const AMOptionsBubblePressEnabled;
 
 @interface AMBubbleGlobals : NSObject
 

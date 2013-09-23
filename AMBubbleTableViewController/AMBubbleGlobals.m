@@ -33,6 +33,8 @@ NSString *const AMOptionsBubbleTextColor = @"AMOptionsBubbleTextColor";
 NSString *const AMOptionsBubbleTextFont = @"AMOptionsBubbleTextFont";
 NSString *const AMOptionsUsernameFont = @"AMOptionsUsernameFont";
 NSString *const AMOptionsButtonFont = @"AMOptionsButtonFont";
+NSString *const AMOptionsBubbleSwipeEnabled = @"AMOptionsBubbleSwipeEnabled";
+NSString *const AMOptionsBubblePressEnabled = @"AMOptionsBubblePressEnabled";
 
 @implementation AMBubbleGlobals
 
