@@ -82,7 +82,7 @@
 
 - (void)swipedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame andDirection:(UISwipeGestureRecognizerDirection)direction
 {
-
+	NSLog(@"swiped");
 }
 
 #pragma mark - AMBubbleTableDataSource
