@@ -259,14 +259,14 @@
 - (void)handleSwipeGesture:(UISwipeGestureRecognizer *)sender
 {
 	if ([self.delegate respondsToSelector:@selector(swipedCellAtIndexPath:withFrame:andDirection:)]) {
-		[self.delegate swipedCellAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:sender.view.tag] withFrame:sender.view.frame andDirection:sender.direction];
+		[self.delegate swipedCellAtIndexPath:[NSIndexPath indexPathForRow:sender.view.tag inSection:0] withFrame:sender.view.frame andDirection:sender.direction];
 	}
 }
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender
 {
 	if ([self.delegate respondsToSelector:@selector(longPressedCellAtIndexPath:withFrame:)]) {
-		[self.delegate longPressedCellAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:sender.view.tag] withFrame:sender.view.frame];
+		[self.delegate longPressedCellAtIndexPath:[NSIndexPath indexPathForRow:sender.view.tag inSection:0] withFrame:sender.view.frame];
 	}
 }
 
