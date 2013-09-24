@@ -266,7 +266,9 @@
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender
 {
 	if ([self.delegate respondsToSelector:@selector(longPressedCellAtIndexPath:withFrame:)]) {
-		[self.delegate longPressedCellAtIndexPath:[NSIndexPath indexPathForRow:sender.view.tag inSection:0] withFrame:sender.view.frame];
+		if (sender.state == UIGestureRecognizerStateBegan) {
+			[self.delegate longPressedCellAtIndexPath:[NSIndexPath indexPathForRow:sender.view.tag inSection:0] withFrame:sender.view.frame];
+		}
 	}
 }
 
