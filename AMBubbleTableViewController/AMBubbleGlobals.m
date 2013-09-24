@@ -49,7 +49,9 @@ NSString *const AMOptionsBubblePressEnabled = @"AMOptionsBubblePressEnabled";
 	AMOptionsAvatarSize: @50,
 	AMOptionsAccessorySize: @50,
 	AMOptionsAccessoryMargin: @5,
-	AMOptionsTimestampHeight: @40
+	AMOptionsTimestampHeight: @40,
+	AMOptionsBubblePressEnabled: @YES,
+	AMOptionsBubbleSwipeEnabled: @YES
 	} mutableCopy];
 
 	// Add default styles

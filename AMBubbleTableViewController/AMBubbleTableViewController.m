@@ -246,6 +246,7 @@
 					  andParams:@{
 		 @"text": text,
 		 @"date": stringDate,
+		 @"index": @(indexPath.row),
 		 @"username": (username ? username : @""),
 		 @"avatar": (avatar ? avatar: @""),
 		 @"color": (color ? color: @"")
