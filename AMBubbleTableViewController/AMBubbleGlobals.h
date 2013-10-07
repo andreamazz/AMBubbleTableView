@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 //
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 typedef enum {
 	AMBubbleTableStyleDefault,
 	AMBubbleTableStyleSquare,

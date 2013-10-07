@@ -104,7 +104,6 @@
 	
     // Input background
     CGRect inputFrame = CGRectMake(0.0f, self.view.frame.size.height - kInputHeight, self.view.frame.size.width, kInputHeight);
-	
 	self.imageInput = [[UIImageView alloc] initWithImage:self.options[AMOptionsImageBar]];
 	[self.imageInput setFrame:inputFrame];
 	[self.imageInput setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin)];
@@ -128,6 +127,7 @@
     [self.textView setKeyboardAppearance:UIKeyboardAppearanceDefault];
     [self.textView setKeyboardType:UIKeyboardTypeDefault];
     [self.textView setReturnKeyType:UIReturnKeyDefault];
+	
 	[self.textView setDelegate:self];
     [self.imageInput addSubview:self.textView];
 	self.previousTextFieldHeight = self.textView.contentSize.height;
@@ -344,34 +344,44 @@
 		duration -= delay;
 	}
 	
-    [UIView animateWithDuration:duration
-                          delay:delay
-                        options:[AMBubbleGlobals animationOptionsForCurve:curve]
-                     animations:^{
-						 CGFloat inputViewFrameY = keyboardY - self.imageInput.frame.size.height;
-                         
-                         self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,
-                                                           inputViewFrameY,
-                                                           self.imageInput.frame.size.width,
-                                                           self.imageInput.frame.size.height);
-						 
-                         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-                                                                0.0f,
-                                                                viewHeight - self.imageInput.frame.origin.y - kInputHeight,
-                                                                0.0f);
-
-						 
-						 
-                         self.tableView.contentInset = insets;
-                         self.tableView.scrollIndicatorInsets = insets;
-                     }
-                     completion:^(BOOL finished) {
-                     }];
+	void (^completition)(void) = ^{
+		CGFloat inputViewFrameY = keyboardY - self.imageInput.frame.size.height;
+		
+		self.imageInput.frame = CGRectMake(self.imageInput.frame.origin.x,
+										   inputViewFrameY,
+										   self.imageInput.frame.size.width,
+										   self.imageInput.frame.size.height);
+		
+		UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
+											   0.0f,
+											   viewHeight - self.imageInput.frame.origin.y - kInputHeight,
+											   0.0f);
+		
+		
+		
+		self.tableView.contentInset = insets;
+		self.tableView.scrollIndicatorInsets = insets;
+	};
+	
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		[UIView animateWithDuration:0.5
+							  delay:0
+			 usingSpringWithDamping:500.0f
+			  initialSpringVelocity:0.0f
+							options:UIViewAnimationOptionCurveLinear
+						 animations:completition
+						 completion:nil];
+	} else {
+		[UIView animateWithDuration:duration
+							  delay:delay
+							options:[AMBubbleGlobals animationOptionsForCurve:curve]
+						 animations:completition
+						 completion:nil];
+	}
 }
 
 - (void)resizeTextViewByHeight:(CGFloat)delta
 {
-	
 	int numLines = self.textView.contentSize.height / self.textView.font.lineHeight;
     
 	self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
@@ -402,11 +412,18 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-	// TODO: trim white spaces
 	[self.buttonSend setEnabled:([textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)];
 
 	CGFloat maxHeight = self.textView.font.lineHeight * 5;
 	CGFloat textViewContentHeight = textView.contentSize.height;
+	
+	// workaround for iOS7, still not working wuite right...
+//	UITextView *tempTextView = [[UITextView alloc] init];
+//	tempTextView.font = self.textView.font;
+//	tempTextView.text = self.textView.text;
+//	CGSize size = [tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
+//	textViewContentHeight = size.height;
+	
 	CGFloat delta = textViewContentHeight - self.previousTextFieldHeight;
 	BOOL isShrinking = textViewContentHeight < self.previousTextFieldHeight;
 
