@@ -23,6 +23,8 @@
 	[self setDataSource:self]; // Weird, uh?
 	[self setDelegate:self];
 	
+	[self setTitle:@"Chat"];
+	
 	// Dummy data
 	self.data = [[NSMutableArray alloc] initWithArray:@[
 				 @{
