@@ -118,7 +118,7 @@
     [self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [self.textView setScrollIndicatorInsets:UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f)];
     [self.textView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-    [self.textView setScrollEnabled:NO];
+    //[self.textView setScrollEnabled:NO];
     [self.textView setScrollsToTop:NO];
     [self.textView setUserInteractionEnabled:YES];
     [self.textView setFont:self.options[AMOptionsTextFieldFont]];
@@ -130,8 +130,13 @@
 	
 	[self.textView setDelegate:self];
     [self.imageInput addSubview:self.textView];
-	self.previousTextFieldHeight = self.textView.contentSize.height;
-
+	//self.previousTextFieldHeight = self.textView.contentSize.height;
+    UITextView *tempTextView = [[UITextView alloc] init];
+    tempTextView.font = self.textView.font;
+    tempTextView.text = @"";
+    CGSize size = [tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
+    self.previousTextFieldHeight = size.height;
+    
 	// Input field's background
     self.imageInputBack = [[UIImageView alloc] initWithFrame:CGRectMake(self.textView.frame.origin.x - 1.0f,
 																		0.0f,
@@ -387,7 +392,7 @@
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
 	
-    self.textView.scrollEnabled = (numLines >= 4);
+    	//self.textView.scrollEnabled = (numLines >= 4);
 	
 	// Adjust table view's insets
 	CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? self.view.frame.size.width : self.view.frame.size.height;
@@ -416,11 +421,13 @@
 	CGFloat textViewContentHeight = textView.contentSize.height;
 	
 	// workaround for iOS7, still not working wuite right...
-//	UITextView *tempTextView = [[UITextView alloc] init];
-//	tempTextView.font = self.textView.font;
-//	tempTextView.text = self.textView.text;
-//	CGSize size = [tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
-//	textViewContentHeight = size.height;
+    if ([@"" isEqualToString:textView.text]) {
+    	UITextView *tempTextView = [[UITextView alloc] init];
+    	tempTextView.font = self.textView.font;
+    	tempTextView.text = self.textView.text;
+    	CGSize size = [tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
+        textViewContentHeight  = size.height;
+    }
 	
 	CGFloat delta = textViewContentHeight - self.previousTextFieldHeight;
 	BOOL isShrinking = textViewContentHeight < self.previousTextFieldHeight;
@@ -470,7 +477,7 @@
 	[self.textView setText:@""];
 	[self textViewDidChange:self.textView];
 	[self resizeTextViewByHeight:self.textView.contentSize.height - self.previousTextFieldHeight];
-	self.previousTextFieldHeight = self.textView.contentSize.height;
+	//self.previousTextFieldHeight = self.textView.contentSize.height;
     [self.buttonSend setEnabled:NO];
 	[self scrollToBottomAnimated:YES];
 }
