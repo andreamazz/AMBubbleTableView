@@ -6,7 +6,7 @@ Simple implementation of a UITableView styled as chat bubbles. It's strongly bas
 Screenshot
 --------------------
 ![AMBubbleTableViewController](http://www.eflatgames.com/github/AMBubbleTableView.png)
-![AMBubbleTableViewController-Flat](http://www.eflatgames.com/github/AMBubbleTableView2.png)
+![AMBubbleTableViewController-Flat](http://www.eflatgames.com/github/AMBubbleTableView3.png)
 
 Setup with Cocoapods
 --------------------
