@@ -114,6 +114,14 @@ AMOptionsBubbleSwipeEnabled     // @(BOOL), enables the swipe detection on a cel
 AMOptionsBubblePressEnabled     // @(BOOL), enables the long press detection on a cell
 ```
 
+Changelog 
+==================
+
+0.5
+--------------------
+- Added iOS7 compatibility. (Thanks to [Michael James](https://github.com/umjames))
+
+
 TODO
 --------------------
 * Add further customizations
