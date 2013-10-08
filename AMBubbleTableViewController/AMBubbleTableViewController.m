@@ -1,6 +1,6 @@
 //
 //  AMBubbleTableViewController.m
-//  BubbleTableDemo
+//  AMBubbleTableViewController
 //
 //  Created by Andrea Mazzini on 30/06/13.
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIImageView*	imageInputBack;
 @property (nonatomic, strong) UIButton*		buttonSend;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
+@property (nonatomic, strong) UITextView*	tempTextView;
 @property (nonatomic, assign) float			previousTextFieldHeight;
 
 @end
@@ -118,7 +119,6 @@
     [self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [self.textView setScrollIndicatorInsets:UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f)];
     [self.textView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-    //[self.textView setScrollEnabled:NO];
     [self.textView setScrollsToTop:NO];
     [self.textView setUserInteractionEnabled:YES];
     [self.textView setFont:self.options[AMOptionsTextFieldFont]];
@@ -130,11 +130,12 @@
 	
 	[self.textView setDelegate:self];
     [self.imageInput addSubview:self.textView];
-	//self.previousTextFieldHeight = self.textView.contentSize.height;
-    UITextView *tempTextView = [[UITextView alloc] init];
-    tempTextView.font = self.textView.font;
-    tempTextView.text = @"";
-    CGSize size = [tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
+	
+	// This text view is used to get the content size
+	self.tempTextView = [[UITextView alloc] init];
+    self.tempTextView.font = self.textView.font;
+    self.tempTextView.text = @"";
+    CGSize size = [self.tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
     self.previousTextFieldHeight = size.height;
     
 	// Input field's background
@@ -420,12 +421,11 @@
 	CGFloat maxHeight = self.textView.font.lineHeight * 5;
 	CGFloat textViewContentHeight = textView.contentSize.height;
 	
-	// workaround for iOS7, still not working wuite right...
     if ([@"" isEqualToString:textView.text]) {
-    	UITextView *tempTextView = [[UITextView alloc] init];
-    	tempTextView.font = self.textView.font;
-    	tempTextView.text = self.textView.text;
-    	CGSize size = [tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
+    	self.tempTextView = [[UITextView alloc] init];
+    	self.tempTextView.font = self.textView.font;
+    	self.tempTextView.text = self.textView.text;
+    	CGSize size = [self.tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
         textViewContentHeight  = size.height;
     }
 	
@@ -477,7 +477,6 @@
 	[self.textView setText:@""];
 	[self textViewDidChange:self.textView];
 	[self resizeTextViewByHeight:self.textView.contentSize.height - self.previousTextFieldHeight];
-	//self.previousTextFieldHeight = self.textView.contentSize.height;
     [self.buttonSend setEnabled:NO];
 	[self scrollToBottomAnimated:YES];
 }

@@ -1,6 +1,6 @@
 //
 //  AMBubbleAccessoryView.m
-//  BubbleTableDemo
+//  AMBubbleTableViewController
 //
 //  Created by Andrea Mazzini on 06/07/13.
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
