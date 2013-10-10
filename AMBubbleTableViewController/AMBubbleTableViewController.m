@@ -389,7 +389,7 @@
 - (void)resizeTextViewByHeight:(CGFloat)delta
 {
 	int numLines = self.textView.contentSize.height / self.textView.font.lineHeight;
-    
+
 	self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f,
                                                   (numLines >= 6 ? 4.0f : 0.0f),
@@ -409,6 +409,7 @@
 
 	// Slightly scroll the table
 	[self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + delta) animated:YES];
+
 }
 
 - (void)handleTapGesture:(UIGestureRecognizer*)gesture
@@ -421,21 +422,28 @@
 	[self.buttonSend setEnabled:([textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)];
 
 	CGFloat maxHeight = self.textView.font.lineHeight * 5;
-	CGFloat textViewContentHeight = textView.contentSize.height;
+	CGFloat textViewContentHeight = self.textView.contentSize.height;
+	
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		// Fixes the wrong content size computed by iOS7
+		if (textView.text.UTF8String[textView.text.length-1] == '\n') {
+			textViewContentHeight += textView.font.lineHeight;
+		}
+	}
 	
     if ([@"" isEqualToString:textView.text]) {
     	self.tempTextView = [[UITextView alloc] init];
     	self.tempTextView.font = self.textView.font;
     	self.tempTextView.text = self.textView.text;
+		
     	CGSize size = [self.tempTextView sizeThatFits:CGSizeMake(self.textView.frame.size.width, FLT_MAX)];
         textViewContentHeight  = size.height;
     }
-	
+
 	CGFloat delta = textViewContentHeight - self.previousTextFieldHeight;
 	BOOL isShrinking = textViewContentHeight < self.previousTextFieldHeight;
 
 	delta = (textViewContentHeight + delta >= maxHeight) ? 0.0f : delta;
-
 	
 	if(!isShrinking)
         [self resizeTextViewByHeight:delta];
@@ -461,6 +469,19 @@
         
         self.previousTextFieldHeight = MIN(textViewContentHeight, maxHeight);
     }
+	
+	// This is a workaround for an iOS7 bug:
+	// http://stackoverflow.com/questions/18070537/how-to-make-a-textview-scroll-while-editing
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		if([textView.text hasSuffix:@"\n"]) {
+			double delayInSeconds = 0.2;
+			dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+			dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+				CGPoint bottomOffset = CGPointMake(0, self.textView.contentSize.height - self.textView.bounds.size.height);
+				[self.textView setContentOffset:bottomOffset animated:YES];
+			});
+		}
+	}
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
