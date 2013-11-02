@@ -39,6 +39,8 @@
 		[self.imageBackground addSubview:self.textView];
 		[self.imageBackground addSubview:self.labelUsername];
 		[self.contentView addSubview:self.bubbleAccessory];
+		[self.textView setUserInteractionEnabled:YES];
+		[self.imageBackground setUserInteractionEnabled:YES];
     }
     return self;
 }
@@ -61,7 +63,6 @@
 	[self.textView setFont:textFont];
 	[self.textView setEditable:NO];
 	[self.textView setDataDetectorTypes:[self.options[AMOptionsBubbleDetectionType] intValue]];
-	[self.textView setUserInteractionEnabled:YES];
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
 #ifdef __IPHONE_7_0
 		[self.textView setSelectable:YES];
