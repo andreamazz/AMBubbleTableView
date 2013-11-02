@@ -112,6 +112,7 @@ AMOptionsUsernameFont           // UIFont, the username's text font
 AMOptionsButtonFont             // UIFont, the button's text font
 AMOptionsBubbleSwipeEnabled     // @(BOOL), enables the swipe detection on a cell
 AMOptionsBubblePressEnabled     // @(BOOL), enables the long press detection on a cell
+AMOptionsBubbleDetectionType    // @(int), the text detection type, refer to UIDataDetectorTypes. Defaults to UIDataDetectorTypeNone
 ```
 
 Changelog 
