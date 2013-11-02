@@ -28,7 +28,7 @@
 	// Dummy data
 	self.data = [[NSMutableArray alloc] initWithArray:@[
 				 @{
-				 @"text": @"He felt that his whole life was some kind of dream and he sometimes wondered whose it was and whether they were enjoying it.",
+				 @"text": @"http://www.test.com He felt that his whole life was some kind of dream and he sometimes wondered whose it was and whether they were enjoying it.",
 				 @"date": [NSDate date],
 				 @"type": @(AMBubbleCellReceived),
 				 @"username": @"Stevie",
@@ -77,6 +77,10 @@
 
 	// Set a style
 	[self setTableStyle:AMBubbleTableStyleFlat];
+	
+	[self setBubbleTableOptions:@{AMOptionsBubbleDetectionType: @(UIDataDetectorTypeAll),
+								  AMOptionsBubblePressEnabled: @NO,
+								  AMOptionsBubbleSwipeEnabled: @NO}];
 	
 	// Call super after setting up the options
 	[super viewDidLoad];

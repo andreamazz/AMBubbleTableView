@@ -132,6 +132,9 @@ FOUNDATION_EXPORT NSString *const AMOptionsBubbleSwipeEnabled;
 // Enable Long press gesture
 FOUNDATION_EXPORT NSString *const AMOptionsBubblePressEnabled;
 
+// Detection type
+FOUNDATION_EXPORT NSString *const AMOptionsBubbleDetectionType;
+
 @interface AMBubbleGlobals : NSObject
 
 + (NSDictionary*)defaultOptions;

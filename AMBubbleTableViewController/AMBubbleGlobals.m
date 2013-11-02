@@ -35,6 +35,7 @@ NSString *const AMOptionsUsernameFont = @"AMOptionsUsernameFont";
 NSString *const AMOptionsButtonFont = @"AMOptionsButtonFont";
 NSString *const AMOptionsBubbleSwipeEnabled = @"AMOptionsBubbleSwipeEnabled";
 NSString *const AMOptionsBubblePressEnabled = @"AMOptionsBubblePressEnabled";
+NSString *const AMOptionsBubbleDetectionType = @"AMOptionsBubbleDetectionType";
 
 @implementation AMBubbleGlobals
 
@@ -43,6 +44,7 @@ NSString *const AMOptionsBubblePressEnabled = @"AMOptionsBubblePressEnabled";
 	// Default options with default style
 	NSMutableDictionary* defaults = [@{
 	AMOptionsTimestampEachMessage : @YES,
+	AMOptionsBubbleDetectionType: @(UIDataDetectorTypeNone),
 	AMOptionsAccessoryClass: @"AMBubbleAccessoryView",
 	AMOptionsTimestampShortFont: [UIFont boldSystemFontOfSize:11],
 	AMOptionsTimestampFont: [UIFont boldSystemFontOfSize:13],

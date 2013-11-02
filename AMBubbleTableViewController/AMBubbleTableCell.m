@@ -13,7 +13,7 @@
 @interface AMBubbleTableCell ()
 
 @property (nonatomic, weak)   NSDictionary* options;
-@property (nonatomic, strong) UILabel*		labelText;
+@property (nonatomic, strong) UITextView*	textView;
 @property (nonatomic, strong) UIImageView*	imageBackground;
 @property (nonatomic, strong) UILabel*		labelUsername;
 @property (nonatomic, strong) UIView<AMBubbleAccessory>*		bubbleAccessory;
@@ -30,13 +30,13 @@
 		self.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 		self.accessoryType = UITableViewCellAccessoryNone;
-		self.labelText = [[UILabel alloc] init];
+		self.textView = [[UITextView alloc] init];
 		self.imageBackground = [[UIImageView alloc] init];
 		self.labelUsername = [[UILabel alloc] init];
 		self.bubbleAccessory = [[NSClassFromString(options[AMOptionsAccessoryClass]) alloc] init];
 		[self.bubbleAccessory setOptions:options];
 		[self.contentView addSubview:self.imageBackground];
-		[self.imageBackground addSubview:self.labelText];
+		[self.imageBackground addSubview:self.textView];
 		[self.imageBackground addSubview:self.labelUsername];
 		[self.contentView addSubview:self.bubbleAccessory];
     }
@@ -57,11 +57,22 @@
 									  lineBreakMode:NSLineBreakByWordWrapping];
 	
 	
-	[self.labelText setBackgroundColor:[UIColor clearColor]];
-	[self.labelText setFont:textFont];
-	[self.labelText setNumberOfLines:0];
-	[self.labelText setTextColor:self.options[AMOptionsBubbleTextColor]];
-	
+	[self.textView setBackgroundColor:[UIColor clearColor]];
+	[self.textView setFont:textFont];
+	[self.textView setEditable:NO];
+	[self.textView setDataDetectorTypes:[self.options[AMOptionsBubbleDetectionType] intValue]];
+	[self.textView setUserInteractionEnabled:YES];
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+#ifdef __IPHONE_7_0
+		[self.textView setSelectable:YES];
+		[self.textView.textContainer setLineFragmentPadding:0];
+		[self.textView setTextContainerInset:UIEdgeInsetsZero];
+#endif
+	} else {
+		[self.textView setContentInset:UIEdgeInsetsMake(-8,-8,-8,-8)];
+	}
+	[self.textView setTextColor:self.options[AMOptionsTextFieldFontColor]];
+
 	[self.bubbleAccessory setupView:params];
 	
 	// Right Bubble
@@ -150,20 +161,19 @@
 	}
 	
 	if (type == AMBubbleCellTimestamp) {
-		
+		[self.textView setDataDetectorTypes:UIDataDetectorTypeNone];
 		[self.bubbleAccessory setFrame:CGRectZero];
 		
-		self.labelText.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-		[self.labelText setTextAlignment:NSTextAlignmentCenter];
-        [self.labelText setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-		[self.labelText setFont:self.options[AMOptionsTimestampFont]];
-		[self.labelText setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
-		[self.labelText setText:params[@"text"]];
+		self.textView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+		[self.textView setTextAlignment:NSTextAlignmentCenter];
+        [self.textView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+		[self.textView setFont:self.options[AMOptionsTimestampFont]];
+		[self.textView setTextColor:[UIColor colorWithRed:100.0f/255.0f green:120.0f/255.0f blue:150.0f/255.0f alpha:1]];
+		[self.textView setText:params[@"text"]];
 		[self.imageBackground setFrame:CGRectZero];
-		self.labelText.text = params[@"date"];
+		self.textView.text = params[@"date"];
 	}
-		
-	
+			
 }
 
 - (void)setupBubbleWithType:(AMBubbleCellType)type background:(CGRect)frame textFrame:(CGRect)textFrame andText:(NSString*)text
@@ -178,9 +188,14 @@
 	
 	[self.imageBackground setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
 	
-	[self.labelText setFrame:textFrame];
-	[self.labelText setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-	[self.labelText setText:text];
+	// Dirty fix for ios previous than 7.0
+	if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		textFrame.size.width += 12;
+	}
+	[self.textView setFrame:textFrame];
+	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+	[self.textView setText:nil];
+	[self.textView setText:text];
 }
 
 
