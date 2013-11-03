@@ -1,4 +1,3 @@
-before_script:
-  - cd BubbleTableDemo
 language: objective-c
-xcode_sdk: iphonesimulator
+before_script: travis/before_script.sh
+script: travis/script.sh
