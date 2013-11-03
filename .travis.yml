@@ -1,3 +1,4 @@
 language: objective-c
-before_script: travis/before_script.sh
-script: travis/script.sh
+install:
+- cd BubbleTableDemo
+script: xctool -workspace BubbleTableDemo.xcworkspace -scheme 'BubbleTableDemo' -configuration Release -sdk iphonesimulator -arch i386 build
