@@ -1,1 +1,3 @@
+before_script:
+  - cd BubbleTableDemo
 language: objective-c
