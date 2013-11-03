@@ -370,6 +370,7 @@
 	};
 	
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+#ifdef __IPHONE_7_0
 		[UIView animateWithDuration:0.5
 							  delay:0
 			 usingSpringWithDamping:500.0f
@@ -377,6 +378,7 @@
 							options:UIViewAnimationOptionCurveLinear
 						 animations:completition
 						 completion:nil];
+#endif
 	} else {
 		[UIView animateWithDuration:duration
 							  delay:delay
