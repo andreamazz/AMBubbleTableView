@@ -1,6 +1,8 @@
 AMBubbleTableViewController
 ==================
 
+[![Build Status](https://travis-ci.org/andreamazz/AMBubbleTableView.png)](https://travis-ci.org/andreamazz/AMBubbleTableView)
+
 Simple implementation of a UITableView styled as chat bubbles. It's strongly based on Jesse Squires'  [MessagesTableViewController](https://github.com/jessesquires/MessagesTableViewController), since I needed to deeply customize the view, I decided to spawn a new library.  
 
 Screenshot
