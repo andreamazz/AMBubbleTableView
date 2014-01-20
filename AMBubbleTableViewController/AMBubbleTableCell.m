@@ -62,6 +62,7 @@
 	[self.textView setBackgroundColor:[UIColor clearColor]];
 	[self.textView setFont:textFont];
 	[self.textView setEditable:NO];
+	[self.textView setScrollEnabled:NO];
 	[self.textView setDataDetectorTypes:[self.options[AMOptionsBubbleDetectionType] intValue]];
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
 #ifdef __IPHONE_7_0
