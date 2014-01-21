@@ -175,6 +175,8 @@
 		[self.imageBackground setFrame:CGRectZero];
 		self.textView.text = params[@"date"];
 	}
+	
+	[self setNeedsLayout];
 			
 }
 

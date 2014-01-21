@@ -2,8 +2,8 @@
 //  AMAppDelegate.m
 //  BubbleTableDemo
 //
-//  Created by Andrea Mazzini on 30/06/13.
-//  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
+//  Created by Andrea on 21/01/14.
+//  Copyright (c) 2014 Fancy Pixel. All rights reserved.
 //
 
 #import "AMAppDelegate.h"
@@ -12,7 +12,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	return YES;
+    // Override point for customization after application launch.
+    return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

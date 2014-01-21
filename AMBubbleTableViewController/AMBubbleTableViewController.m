@@ -197,6 +197,8 @@
 	NSDate* date = [self.dataSource timestampForRowAtIndexPath:indexPath];
 	AMBubbleTableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	
+	NSAssert(text != nil || date != nil, @"Text and Date cannot be both nil");
+	
 	UIImage* avatar;
 	UIColor* color;
 	
