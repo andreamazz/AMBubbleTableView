@@ -184,6 +184,7 @@
 				655392C017802FF600C09726 /* AMAppDelegate.m */,
 				655392C817802FF600C09726 /* MainStoryboard.storyboard */,
 				65C0489917881C270057C421 /* Resources */,
+				6573158C188EE939001F51D3 /* iPad */,
 				655392B717802FF600C09726 /* Supporting Files */,
 			);
 			path = BubbleTableDemo;
@@ -272,6 +273,13 @@
 				655393431780648D00C09726 /* AMViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6573158C188EE939001F51D3 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 		65C0489917881C270057C421 /* Resources */ = {
@@ -483,8 +491,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BubbleTableDemo/BubbleTableDemo-Prefix.pch";
 				INFOPLIST_FILE = "BubbleTableDemo/BubbleTableDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -495,8 +504,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BubbleTableDemo/BubbleTableDemo-Prefix.pch";
 				INFOPLIST_FILE = "BubbleTableDemo/BubbleTableDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -28,7 +28,7 @@
 	// Dummy data
 	self.data = [[NSMutableArray alloc] initWithArray:@[
 				 @{
-				 @"text": @"http://www.test.com He felt that his whole life was some kind of dream and he sometimes wondered whose it was and whether they were enjoying it.",
+				 @"text": @"He felt that his whole life was some kind of dream and he sometimes wondered whose it was and whether they were enjoying it.",
 				 @"date": [NSDate date],
 				 @"type": @(AMBubbleCellReceived),
 				 @"username": @"Stevie",

@@ -52,7 +52,7 @@
 	CGRect content = self.contentView.frame;
 	content.size.width = width;
 	self.contentView.frame = content;
-	
+	self.frame = content;
 	// Configure the cell to show the message in a bubble. Layout message cell & its subviews.
 	CGSize sizeText = [params[@"text"] sizeWithFont:textFont
 								  constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
