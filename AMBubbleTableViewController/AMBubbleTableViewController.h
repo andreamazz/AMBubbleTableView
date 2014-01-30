@@ -11,7 +11,7 @@
 @interface AMBubbleTableViewController : UIViewController
 
 @property (nonatomic, strong) UITableView*	tableView;
-
+@property (nonatomic, strong) UITextView*	textView;
 @property (nonatomic, assign) id<AMBubbleTableDataSource> dataSource;
 @property (nonatomic, assign) id<AMBubbleTableDelegate> delegate;
 

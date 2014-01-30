@@ -18,7 +18,6 @@
 
 @property (strong, nonatomic) NSMutableDictionary*	options;
 @property (nonatomic, strong) UIImageView*	imageInput;
-@property (nonatomic, strong) UITextView*	textView;
 @property (nonatomic, strong) UIImageView*	imageInputBack;
 @property (nonatomic, strong) UIButton*		buttonSend;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
