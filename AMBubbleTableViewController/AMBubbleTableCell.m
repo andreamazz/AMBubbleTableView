@@ -48,7 +48,7 @@
 - (void)setupCellWithType:(AMBubbleCellType)type withWidth:(float)width andParams:(NSDictionary*)params
 {
 	UIFont* textFont = self.options[AMOptionsBubbleTextFont];
-		
+	
 	CGRect content = self.contentView.frame;
 	content.size.width = width;
 	self.contentView.frame = content;
@@ -74,23 +74,23 @@
 		[self.textView setContentInset:UIEdgeInsetsMake(-8,-8,-8,-8)];
 	}
 	[self.textView setTextColor:self.options[AMOptionsTextFieldFontColor]];
-
+	
 	[self.bubbleAccessory setupView:params];
 	
 	// Right Bubble
 	if (type == AMBubbleCellSent) {
-
+		
 		[self.bubbleAccessory setFrame:CGRectMake(width - self.bubbleAccessory.frame.size.width - 2,
 												  2,
 												  self.bubbleAccessory.frame.size.width,
 												  self.bubbleAccessory.frame.size.height)];
-
-
+		
+		
 		CGRect rect = CGRectMake(width - sizeText.width - 34.0f - self.bubbleAccessory.frame.size.width,
 								 textFont.lineHeight - 13.0f,
 								 sizeText.width + 34.0f,
 								 sizeText.height + 12.0f);
-
+		
 		if (rect.size.height > self.bubbleAccessory.frame.size.height) {
 			if ([self.options[AMOptionsAccessoryPosition] intValue] == AMBubbleAccessoryDown) {
 				CGRect frame = self.bubbleAccessory.frame;
@@ -104,7 +104,7 @@
 				rect.origin.y = 0;
 			}
 		}
-
+		
 		[self setupBubbleWithType:type
 					   background:rect
 						textFrame:CGRectMake(12.0f,
@@ -177,13 +177,13 @@
 	}
 	
 	[self setNeedsLayout];
-			
+	
 }
 
 - (void)setupBubbleWithType:(AMBubbleCellType)type background:(CGRect)frame textFrame:(CGRect)textFrame andText:(NSString*)text
 {
 	[self.imageBackground setFrame:frame];
-
+	
 	if (type == AMBubbleCellReceived) {
 		[self.imageBackground setImage:self.options[AMOptionsImageIncoming]];
 	} else {

@@ -208,16 +208,9 @@
 		avatar = [self.dataSource avatarForRowAtIndexPath:indexPath];
 	}
 
-	
 	if (cell == nil) {
 		cell = [[AMBubbleTableCell alloc] initWithOptions:self.options
 										  reuseIdentifier:cellID];
-		
-		// iPad cells are set by default to 320 pixels, this fixes the quirk
-		cell.contentView.frame = CGRectMake(cell.contentView.frame.origin.x,
-											cell.contentView.frame.origin.y,
-											self.tableView.frame.size.width,
-											cell.contentView.frame.size.height);
 
 		if ([self.options[AMOptionsBubbleSwipeEnabled] boolValue]) {
 			UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
@@ -229,6 +222,12 @@
 			[cell addGestureRecognizer:longPressGesture];
 		}
 	}
+	
+	// iPad cells are set by default to 320 pixels, this fixes the quirk
+	cell.contentView.frame = CGRectMake(cell.contentView.frame.origin.x,
+										cell.contentView.frame.origin.y,
+										self.tableView.frame.size.width,
+										cell.contentView.frame.size.height);
 	
 	// Used by the gesture recognizer
 	cell.tag = indexPath.row;
@@ -294,16 +293,41 @@
 	}
     
     // Set MessageCell height.
-    CGSize size = [text sizeWithFont:self.options[AMOptionsBubbleTextFont]
-				   constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
-					   lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize size;
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+#ifdef __IPHONE_7_0
+		size = [text boundingRectWithSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
+								  options:NSStringDrawingUsesLineFragmentOrigin
+							   attributes:@{NSFontAttributeName:self.options[AMOptionsBubbleTextFont]}
+								  context:nil].size;
+#endif
+	} else {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+		size = [text sizeWithFont:self.options[AMOptionsBubbleTextFont]
+				constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
+					lineBreakMode:NSLineBreakByWordWrapping];
+#pragma GCC diagnostic pop
+	}
 	
 	CGSize usernameSize = CGSizeZero;
 	
 	if (![username isEqualToString:@""] && type == AMBubbleCellReceived) {
-		usernameSize = [username sizeWithFont:self.options[AMOptionsTimestampFont]
-							constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
-								lineBreakMode:NSLineBreakByWordWrapping];
+		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+#ifdef __IPHONE_7_0
+			usernameSize = [username boundingRectWithSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
+												  options:NSStringDrawingUsesLineFragmentOrigin
+											   attributes:@{NSFontAttributeName:self.options[AMOptionsTimestampFont]}
+												  context:nil].size;
+#endif
+		} else {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+			usernameSize = [username sizeWithFont:self.options[AMOptionsTimestampFont]
+								constrainedToSize:CGSizeMake(kMessageTextWidth, CGFLOAT_MAX)
+									lineBreakMode:NSLineBreakByWordWrapping];
+#pragma GCC diagnostic pop
+		}
 	}
 	
 	// Account for either the bubble or accessory size
@@ -358,13 +382,8 @@
 										   inputViewFrameY,
 										   self.imageInput.frame.size.width,
 										   self.imageInput.frame.size.height);
-		
-		UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-											   0.0f,
-											   viewHeight - self.imageInput.frame.origin.y - kInputHeight,
-											   0.0f);
-		
-		
+		UIEdgeInsets insets = self.tableView.contentInset;
+		insets.bottom = viewHeight - self.imageInput.frame.origin.y - kInputHeight;
 		
 		self.tableView.contentInset = insets;
 		self.tableView.scrollIndicatorInsets = insets;
@@ -398,21 +417,17 @@
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
 	
-    	//self.textView.scrollEnabled = (numLines >= 4);
-	
 	// Adjust table view's insets
 	CGFloat viewHeight = (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) ? self.view.frame.size.width : self.view.frame.size.height;
-	UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-										   0.0f,
-										   viewHeight - self.imageInput.frame.origin.y - kInputHeight,
-										   0.0f);
+    
+	UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom = viewHeight - self.imageInput.frame.origin.y - kInputHeight;
 
 	self.tableView.contentInset = insets;
 	self.tableView.scrollIndicatorInsets = insets;
 
 	// Slightly scroll the table
 	[self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + delta) animated:YES];
-
 }
 
 - (void)handleTapGesture:(UIGestureRecognizer*)gesture
@@ -454,7 +469,8 @@
     if(delta != 0.0f) {
         [UIView animateWithDuration:0.25f
                          animations:^{
-                             UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + delta, 0.0f);
+                             UIEdgeInsets insets = self.tableView.contentInset;
+                             insets.bottom = self.tableView.contentInset.bottom + delta;
                              self.tableView.contentInset = insets;
                              self.tableView.scrollIndicatorInsets = insets;
 							 
