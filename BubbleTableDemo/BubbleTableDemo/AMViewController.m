@@ -84,6 +84,17 @@
 	
 	// Call super after setting up the options
 	[super viewDidLoad];
+    
+    
+//    [self fakeMessages];
+}
+
+- (void)fakeMessages
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self didSendText:@"Fake message here!"];
+        [self fakeMessages];
+    });
 }
 
 - (void)swipedCellAtIndexPath:(NSIndexPath *)indexPath withFrame:(CGRect)frame andDirection:(UISwipeGestureRecognizerDirection)direction
@@ -133,6 +144,9 @@
 	[self.tableView beginUpdates];
 	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
 	[self.tableView endUpdates];
+    // Either do this:
+    [self scrollToBottomAnimated:YES];
+    // or this:
 	// [super reloadTableScrollingToBottom:YES];
 }
 
