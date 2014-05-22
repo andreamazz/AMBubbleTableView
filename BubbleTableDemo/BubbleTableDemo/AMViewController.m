@@ -85,6 +85,7 @@
 	// Call super after setting up the options
 	[super viewDidLoad];
     
+    [self.tableView setContentInset:UIEdgeInsetsMake(64, 0, 0, 0)];
     
 //    [self fakeMessages];
 }
