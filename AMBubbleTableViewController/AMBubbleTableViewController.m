@@ -170,8 +170,9 @@
     [self.buttonSend setTitleShadowColor:titleShadow forState:UIControlStateHighlighted];
     self.buttonSend.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
 
-    [self.buttonSend setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.buttonSend setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self.buttonSend setTitleColor:self.options[AMOptionsButtonTextColor] forState:UIControlStateNormal];
+    [self.buttonSend setTitleColor:self.options[AMOptionsButtonHighlightedTextColor] forState:UIControlStateHighlighted];
+    [self.buttonSend setTitleColor:self.options[AMOptionsButtonDisabledTextColor] forState:UIControlStateDisabled];
     [self.buttonSend setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateDisabled];
     
     [self.buttonSend setEnabled:NO];

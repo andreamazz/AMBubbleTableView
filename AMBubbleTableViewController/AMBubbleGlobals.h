@@ -96,6 +96,15 @@ FOUNDATION_EXPORT NSString *const AMOptionsImageButton;
 // Button higlighted image
 FOUNDATION_EXPORT NSString *const AMOptionsImageButtonHighlight;
 
+// Button text color
+FOUNDATION_EXPORT NSString *const AMOptionsButtonTextColor;
+
+// Button higlighted text color
+FOUNDATION_EXPORT NSString *const AMOptionsButtonHighlightedTextColor;
+
+// Button disabled text color
+FOUNDATION_EXPORT NSString *const AMOptionsButtonDisabledTextColor;
+
 // Textfield background
 FOUNDATION_EXPORT NSString *const AMOptionsTextFieldBackground;
 

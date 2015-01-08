@@ -80,7 +80,8 @@
 	
 	[self setBubbleTableOptions:@{AMOptionsBubbleDetectionType: @(UIDataDetectorTypeAll),
 								  AMOptionsBubblePressEnabled: @NO,
-								  AMOptionsBubbleSwipeEnabled: @NO}];
+								  AMOptionsBubbleSwipeEnabled: @NO,
+                                  AMOptionsButtonTextColor: [UIColor colorWithRed:1.0f green:1.0f blue:184.0f/256 alpha:1.0f]}];
 	
 	// Call super after setting up the options
 	[super viewDidLoad];

@@ -23,6 +23,9 @@ NSString *const AMOptionsImageBar = @"AMOptionsImageBar";
 NSString *const AMOptionsImageInput = @"AMOptionsImageInput";
 NSString *const AMOptionsImageButton = @"AMOptionsImageButton";
 NSString *const AMOptionsImageButtonHighlight = @"AMOptionsImageButtonHighlight";
+NSString *const AMOptionsButtonTextColor = @"AMOptionsButtonTextColor";
+NSString *const AMOptionsButtonHighlightedTextColor = @"AMOptionsButtonHighlightedTextColor";
+NSString *const AMOptionsButtonDisabledTextColor = @"AMOptionsButtonDisabledTextColor";
 NSString *const AMOptionsTextFieldBackground = @"AMOptionsTextFieldBackground";
 NSString *const AMOptionsTextFieldFont = @"AMOptionsTextFieldFont";
 NSString *const AMOptionsTextFieldFontColor = @"AMOptionsTextFieldFontColor";
@@ -69,6 +72,9 @@ NSString *const AMOptionsBubbleDetectionType = @"AMOptionsBubbleDetectionType";
 	AMOptionsImageBar: [[UIImage imageNamed:@"imageBar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)],
 	AMOptionsImageInput: [[UIImage imageNamed:@"imageInput"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)],
 	AMOptionsImageButton: [[UIImage imageNamed:@"buttonSend"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f)],
+    AMOptionsButtonTextColor: [UIColor whiteColor],
+    AMOptionsButtonHighlightedTextColor: [UIColor whiteColor],
+    AMOptionsButtonDisabledTextColor :[UIColor colorWithWhite:1.0f alpha:0.5f],
 	AMOptionsImageButtonHighlight: [[UIImage imageNamed:@"buttonSendHighlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f)],
 	AMOptionsTextFieldBackground: [UIColor whiteColor],
 	AMOptionsTextFieldFont: [UIFont systemFontOfSize:15],
@@ -91,6 +97,9 @@ NSString *const AMOptionsBubbleDetectionType = @"AMOptionsBubbleDetectionType";
 	AMOptionsImageInput: [[UIImage imageNamed:@"imageInput"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)],
 	AMOptionsImageButton: [[UIImage imageNamed:@"buttonSend"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f)],
 	AMOptionsImageButtonHighlight: [[UIImage imageNamed:@"buttonSendHighlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f)],
+    AMOptionsButtonTextColor: [UIColor whiteColor],
+    AMOptionsButtonHighlightedTextColor: [UIColor whiteColor],
+    AMOptionsButtonDisabledTextColor :[UIColor colorWithWhite:1.0f alpha:0.5f],
 	AMOptionsTextFieldBackground: [UIColor whiteColor],
 	AMOptionsTextFieldFont: [UIFont systemFontOfSize:15],
 	AMOptionsTextFieldFontColor: [UIColor blackColor],
@@ -113,6 +122,9 @@ NSString *const AMOptionsBubbleDetectionType = @"AMOptionsBubbleDetectionType";
 	AMOptionsImageInput: [[UIImage imageNamed:@"imageInputFlat"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)],
 	AMOptionsImageButton: [[UIImage imageNamed:@"buttonSendFlat"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f)],
 	AMOptionsImageButtonHighlight: [[UIImage imageNamed:@"buttonSendHighlightedFlat"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f)]	,
+    AMOptionsButtonTextColor: [UIColor whiteColor],
+    AMOptionsButtonHighlightedTextColor: [UIColor whiteColor],
+    AMOptionsButtonDisabledTextColor :[UIColor colorWithWhite:1.0f alpha:0.5f],
 	AMOptionsTextFieldBackground: [UIColor colorWithRed:0.827 green:0.827 blue:0.827 alpha:1],
 	AMOptionsTextFieldFont: [UIFont systemFontOfSize:15],
 	AMOptionsTextFieldFontColor: [UIColor darkGrayColor],
