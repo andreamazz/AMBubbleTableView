@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 //
 
+@import UIKit;
+
 #import "AMBubbleGlobals.h"
 
 @interface AMBubbleTableViewController : UIViewController
