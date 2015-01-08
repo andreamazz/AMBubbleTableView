@@ -5,7 +5,6 @@
 //  Created by Andrea Mazzini on 30/06/13.
 //  Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 //
-#include <UIKit/UIKit.h> // should be included for things make work
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
