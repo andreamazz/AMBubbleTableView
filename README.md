@@ -12,7 +12,7 @@ Screenshot
 --------------------
 ![AMBubbleTableViewController](https://raw.githubusercontent.com/andreamazz/AMBubbleTableView/master/screenshot.gif)
 
-Setup with Cocoapods
+Setup with CocoaPods
 --------------------
 * Add ```pod 'AMBubbleTableViewController'``` to your Podfile
 * Run ```pod install```
@@ -21,7 +21,7 @@ Setup with Cocoapods
 * Subclass ```AMBubbleTableViewController``` from your controller
 * Provide a ```AMBubbleTableDataSource``` and ```AMBubbleTableDelegate```
 
-Setup without Cocoapods
+Setup without CocoaPods
 --------------------
 * Clone this repo
 * Add the ```AMBubbleTableViewController``` folder to your project
